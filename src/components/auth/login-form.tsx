@@ -47,12 +47,12 @@ export function LoginForm() {
       <div className="w-full max-w-md space-y-6">
         {/* Logo & Title */}
         <div className="flex flex-col items-center gap-3 text-center">
-          <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-primary">
-            <BarChart3 className="h-7 w-7 text-primary-foreground" aria-hidden="true" />
+          <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-[#E31837] shadow-lg shadow-[#E31837]/20">
+            <span className="text-lg font-black text-white leading-none">FC</span>
           </div>
           <div>
-            <h1 className="text-2xl font-bold tracking-tight">CLever</h1>
-            <p className="text-sm text-muted-foreground">Collection Management Platform</p>
+            <h1 className="text-2xl font-bold tracking-tight">FE CREDIT</h1>
+            <p className="text-sm text-muted-foreground">Hệ thống Quản lý Thu hồi Nợ</p>
           </div>
         </div>
 

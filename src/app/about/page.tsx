@@ -21,9 +21,9 @@ export default function AboutPage() {
                   <BarChart3 className="h-7 w-7 text-primary-foreground" aria-hidden="true" />
                 </div>
                 <div>
-                  <h1 className="text-xl font-bold">CLever Collection Hub</h1>
+                  <h1 className="text-xl font-bold">FE CREDIT Collection</h1>
                   <p className="text-sm text-muted-foreground">
-                    Omnichannel & client-centric collection management platform
+                    Nền tảng quản lý thu hồi nợ đa kênh — VPB SMBC Finance Company
                   </p>
                   <div className="mt-2 flex items-center gap-2">
                     <Badge variant="secondary" className="font-mono">
@@ -43,7 +43,7 @@ export default function AboutPage() {
             <CardHeader>
               <CardTitle className="text-base">Platform Capabilities</CardTitle>
               <CardDescription>
-                Inspired by CRIF Digital CLever — end-to-end collection management
+                Inspired by CRIF Digital — end-to-end collection management
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -149,14 +149,14 @@ export default function AboutPage() {
             <CardContent>
               <div className="space-y-2 text-sm">
                 <p className="text-muted-foreground">
-                  This platform is inspired by CRIF Digital&apos;s CLever collection solution
-                  and StrategyOne decision engine, adapted for modern web technologies.
+                  This platform is built for FE CREDIT&apos;s collection operations,
+                  integrating modern AI/ML technology for consumer finance in Vietnam.
                 </p>
                 <div className="mt-3 flex flex-wrap gap-2">
                   {[
-                    'CRIF CLever',
-                    'CRIF StrategyOne',
-                    'CRIF Advanced Analytics',
+                    'FE CREDIT',
+                    'VPB SMBC FC',
+                    'Consumer Finance',
                     'Next.js 16',
                     'React 19',
                     'shadcn/ui',

@@ -11,13 +11,13 @@ export function DashboardHeader() {
   return (
     <header className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
       <div className="flex items-center gap-3">
-        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary">
-          <BarChart3 className="h-5 w-5 text-primary-foreground" aria-hidden="true" />
+        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#E31837]">
+          <span className="text-sm font-black text-white leading-none">FC</span>
         </div>
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">Collections Dashboard</h1>
+          <h1 className="text-2xl font-bold tracking-tight">FE CREDIT Collection</h1>
           <p className="text-sm text-muted-foreground">
-            Monitor and manage collection buckets B1–B5
+            Theo dõi và quản lý thu hồi nợ theo nhóm B1–B5
           </p>
         </div>
       </div>

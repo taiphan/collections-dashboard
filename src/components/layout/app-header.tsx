@@ -14,9 +14,11 @@ interface AppHeaderProps {
 
 export function AppHeader({ title, description }: AppHeaderProps) {
   return (
-    <header className="flex h-14 shrink-0 items-center gap-2 border-b px-4">
-      <SidebarTrigger className="cursor-pointer" />
-      <Separator orientation="vertical" className="mr-2 h-4" />
+    <div className="shrink-0">
+      <div className="h-1 bg-[#E31837]" />
+      <header className="flex h-14 items-center gap-2 border-b bg-card px-4">
+        <SidebarTrigger className="cursor-pointer" />
+        <Separator orientation="vertical" className="mr-2 h-4" />
 
       {title && (
         <div className="flex items-center gap-2">
@@ -47,5 +49,6 @@ export function AppHeader({ title, description }: AppHeaderProps) {
         <ThemeToggle />
       </div>
     </header>
+    </div>
   );
 }
