@@ -1,36 +1,101 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<p align="center">
+  <img src="logo.svg" alt="Collections Dashboard" width="120" height="120" />
+</p>
+
+<h1 align="center">Collections Dashboard</h1>
+
+<p align="center">
+  <strong>Debt collections management platform with real-time analytics and agent performance tracking.</strong>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/version-1.0.0-green" alt="Version" />
+  <img src="https://img.shields.io/badge/license-MIT-blue" alt="License" />
+  <img src="https://img.shields.io/badge/Next.js-16-black" alt="Next.js" />
+  <img src="https://img.shields.io/badge/TypeScript-5-blue" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/Tailwind-4-06b6d4" alt="Tailwind" />
+</p>
+
+---
+
+## Overview
+
+Collections Dashboard is a comprehensive debt collections management system that provides real-time visibility into collection operations, agent performance, compliance monitoring, and strategy configuration.
+
+## Features
+
+- **Case Management** — Track and manage collection cases with status workflows
+- **Analytics Dashboard** — Interactive charts and KPIs for collection performance
+- **Agent Tracking** — Monitor agent productivity, call metrics, and outcomes
+- **Scoring Engine** — Configurable scoring models for account prioritization
+- **Compliance Module** — Regulatory compliance monitoring and audit trails
+- **Strategy Builder** — Configure and manage collection strategies
+- **Multi-Theme** — Light, dark, and system theme support
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Framework | Next.js 16 (App Router, Turbopack) |
+| Language | TypeScript 5 (strict mode) |
+| UI Components | shadcn/ui + Base UI + Radix |
+| Styling | Tailwind CSS v4 |
+| State | Zustand with persistence |
+| Charts | Recharts |
+| Data Import | PapaParse (CSV) |
+| Validation | Zod |
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 20+
+- npm or pnpm
+
+### Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+cd collections-dashboard
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Development
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run dev -- -p 3010
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Open [http://localhost:3010](http://localhost:3010) in your browser.
 
-## Learn More
+### Build
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run build
+npm start
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+src/
+├── app/              # Next.js App Router pages
+├── components/
+│   ├── ui/           # Reusable UI primitives
+│   └── ...           # Feature components
+└── lib/
+    ├── store.ts      # Zustand state management
+    └── utils.ts      # Utility functions
+```
 
-## Deploy on Vercel
+## Scripts
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start development server |
+| `npm run build` | Production build |
+| `npm start` | Start production server |
+| `npm run lint` | Run ESLint |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## License
+
+This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.

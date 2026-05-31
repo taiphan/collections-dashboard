@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200" fill="none">
+  <rect width="200" height="200" rx="40" fill="#0f172a"/>
+  <path d="M35 95l65-40 65 40" stroke="#60a5fa" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <path d="M50 100v50a5 5 0 005 5h90a5 5 0 005-5v-50" stroke="#60a5fa" stroke-width="8" fill="none"/>
+  <rect x="80" y="115" width="40" height="40" rx="4" stroke="#93c5fd" stroke-width="6" fill="none"/>
+  <path d="M80 135h40" stroke="#93c5fd" stroke-width="4"/>
+  <text x="100" y="185" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="700" fill="#94a3b8">WMS</text>
+</svg>

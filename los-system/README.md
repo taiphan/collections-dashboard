@@ -1,127 +1,142 @@
-# LOS — Loan Origination System
+<p align="center">
+  <img src="logo.svg" alt="LOS System" width="120" height="120" />
+</p>
 
-Enterprise-grade Loan Origination System inspired by Pega Constellation 8.24.1.3.
+<h1 align="center">LOS — Loan Origination System</h1>
 
-## Architecture
+<p align="center">
+  <strong>End-to-end loan origination platform with automated decision engine, case processing, and SLA monitoring.</strong>
+</p>
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    Frontend (React + Vite)                    │
-│  Dashboard │ Cases │ Applications │ Customers │ Workflow UI  │
-└──────────────────────────────┬──────────────────────────────┘
-                               │ REST API
-┌──────────────────────────────┴──────────────────────────────┐
-│                   Backend (Express + Node.js)                 │
-├─────────────┬──────────────┬──────────────┬─────────────────┤
-│   Routes    │  Middleware  │ Controllers  │   Validators    │
-├─────────────┴──────────────┴──────────────┴─────────────────┤
-│                      Domain Layer                            │
-│  Case Management │ Application │ Decision Engine │ Customer  │
-├─────────────────────────────────────────────────────────────┤
-│                   Infrastructure Layer                        │
-│  PostgreSQL (Prisma) │ Redis (Cache) │ BullMQ (Queue)       │
-└─────────────────────────────────────────────────────────────┘
-```
+<p align="center">
+  <img src="https://img.shields.io/badge/version-1.0.0-green" alt="Version" />
+  <img src="https://img.shields.io/badge/license-MIT-blue" alt="License" />
+  <img src="https://img.shields.io/badge/React-18-61dafb" alt="React" />
+  <img src="https://img.shields.io/badge/Express-4-000000" alt="Express" />
+  <img src="https://img.shields.io/badge/TypeScript-5-blue" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/PostgreSQL-16-336791" alt="PostgreSQL" />
+</p>
 
-## Quick Start
+---
 
-### Prerequisites
-- Node.js 20+
-- Docker & Docker Compose
-- PostgreSQL 16 (or use Docker)
-- Redis 7 (or use Docker)
+## Overview
 
-### Setup
+LOS is a full-stack loan origination system that automates the lending workflow from application intake through decisioning, underwriting, and funding. It features a rule-based decision engine, SLA monitoring with breach detection, and a modern React frontend.
 
-```bash
-# 1. Start infrastructure
-docker compose up -d postgres redis
+## Features
 
-# 2. Backend setup
-cd backend
-cp .env.example .env
-npm install
-npx prisma migrate dev
-npx prisma db seed
-npm run dev
+### Backend
+- **Case Processing Pipeline** — Multi-stage workflow (intake → review → decision → funding)
+- **Decision Engine** — Automated rule evaluation with configurable criteria
+- **SLA Monitoring** — Real-time deadline tracking with breach alerts
+- **Background Workers** — BullMQ-powered async job processing
+- **Redis Caching** — High-performance data caching layer
+- **Rate Limiting** — Auth endpoint protection (5 attempts/15min)
 
-# 3. Frontend setup (new terminal)
-cd frontend
-npm install
-npm run dev
-```
-
-### Default Credentials
-| Role | Email | Password |
-|------|-------|----------|
-| Admin | admin@los.com | password123 |
-| Manager | manager@los.com | password123 |
-| Loan Officer | officer@los.com | password123 |
-| Underwriter | underwriter@los.com | password123 |
-
-## Loan Processing Flow
-
-```
-Application → Case Created → INTAKE → VERIFICATION → UNDERWRITING → APPROVAL → DOCUMENTATION → DISBURSEMENT → CLOSED
-```
-
-Each stage has:
-- Configurable tasks (manual + automated)
-- SLA tracking with escalation
-- Stage-gate validation (all tasks must complete before transition)
-- Full audit trail
-
-## API Endpoints
-
-| Method | Path | Description |
-|--------|------|-------------|
-| POST | /api/v1/auth/login | Authenticate user |
-| POST | /api/v1/auth/register | Register new user |
-| GET | /api/v1/auth/me | Get current user |
-| POST | /api/v1/applications | Create application |
-| GET | /api/v1/applications | List applications |
-| POST | /api/v1/applications/:id/submit | Submit application |
-| GET | /api/v1/cases | List cases |
-| GET | /api/v1/cases/dashboard | Dashboard stats |
-| GET | /api/v1/cases/:id | Get case details |
-| POST | /api/v1/cases/:id/transition | Transition stage |
-| POST | /api/v1/cases/:id/assign | Assign case |
-| POST | /api/v1/customers | Create customer |
-| GET | /api/v1/customers | Search customers |
-| PATCH | /api/v1/customers/:id/kyc | Update KYC status |
+### Frontend
+- **Case Dashboard** — Filterable case list with status indicators
+- **Application Workflow** — Step-by-step application processing
+- **Real-Time Updates** — TanStack Query for server state synchronization
+- **Role-Based UI** — Interface adapts to user permissions
+- **Toast Notifications** — Non-blocking feedback for user actions
 
 ## Tech Stack
 
-- **Frontend**: React 18 + Vite + TailwindCSS + TanStack Query + Zustand
-- **Backend**: Express.js + TypeScript + Prisma ORM
-- **Database**: PostgreSQL 16
-- **Cache**: Redis 7
-- **Queue**: BullMQ
-- **Auth**: JWT (15min access / 7d refresh)
+| Layer | Technology |
+|-------|-----------|
+| Frontend | React 18 + Vite |
+| Backend | Express.js + Node.js 20 |
+| Language | TypeScript 5 (strict) |
+| Database | PostgreSQL 16 + Prisma ORM |
+| Cache | Redis (ioredis) |
+| Queue | BullMQ |
+| Auth | JWT + bcrypt (12 rounds) |
+| UI | Radix UI + Tailwind CSS 3 |
+| State | Zustand + TanStack Query |
+| Routing | TanStack Router |
 
-## Phase 1 (Current) — MVP
+## Getting Started
 
-- [x] Case management with stage-gate workflow
-- [x] Application intake and submission
-- [x] Basic decision engine with configurable rules
-- [x] Customer management with KYC
-- [x] Role-based access control
-- [x] Dashboard with pipeline stats
-- [x] SLA tracking
-- [x] Audit trail
+### Prerequisites
 
-## Phase 2 (Planned)
+- Node.js 20+
+- PostgreSQL 16+
+- Redis 7+
 
-- [ ] Document management with OCR
-- [ ] Product catalog admin
-- [ ] Credit bureau integration
-- [ ] Compliance rules engine
-- [ ] Advanced reporting
+### Installation
 
-## Phase 3 (Future)
+```bash
+# Backend
+cd los-system/backend
+npm install
+cp .env.example .env  # Configure database URL, Redis, JWT secret
+npx prisma migrate dev
+npx prisma db seed
 
-- [ ] Advanced decision strategies (A/B testing)
-- [ ] Full regulatory reporting
-- [ ] Multi-channel notifications
-- [ ] White-labeling
-- [ ] Multi-tenancy
+# Frontend
+cd ../frontend
+npm install
+```
+
+### Development
+
+```bash
+# Terminal 1 — Backend (port 4000)
+cd backend
+npm run dev
+
+# Terminal 2 — Frontend (port 3011)
+cd frontend
+npx vite --port 3011
+```
+
+### Build
+
+```bash
+# Backend
+cd backend
+npm run build
+
+# Frontend
+cd frontend
+npm run build
+```
+
+## Project Structure
+
+```
+los-system/
+├── backend/
+│   ├── src/
+│   │   ├── routes/         # API route handlers
+│   │   ├── services/       # Business logic
+│   │   ├── workers/        # Background job processors
+│   │   └── server.ts       # Express app entry
+│   └── prisma/
+│       ├── schema.prisma   # Database schema
+│       └── seed.ts         # Seed data
+├── frontend/
+│   ├── src/
+│   │   ├── pages/          # Route pages
+│   │   ├── components/     # UI components
+│   │   ├── hooks/          # Custom hooks
+│   │   └── stores/         # Zustand stores
+│   └── index.html
+└── README.md
+```
+
+## API Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/auth/login` | Authenticate user |
+| GET | `/api/cases` | List cases (paginated) |
+| POST | `/api/cases` | Create new case |
+| GET | `/api/cases/:id` | Get case details |
+| PUT | `/api/cases/:id/stage` | Advance case stage |
+| GET | `/api/applications` | List applications |
+| POST | `/api/decisions/evaluate` | Run decision engine |
+
+## License
+
+This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.

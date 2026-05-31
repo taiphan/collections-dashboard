@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200" fill="none">
+  <rect width="200" height="200" rx="40" fill="#0f172a"/>
+  <rect x="50" y="30" width="80" height="110" rx="10" stroke="#f59e0b" stroke-width="8" fill="none"/>
+  <path d="M70 60h40M70 80h40M70 100h25" stroke="#fbbf24" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="135" cy="130" r="28" fill="#0f172a" stroke="#f59e0b" stroke-width="8"/>
+  <path d="M135 118v24M123 130h24" stroke="#fbbf24" stroke-width="6" stroke-linecap="round"/>
+  <text x="100" y="185" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="700" fill="#94a3b8">LOS</text>
+</svg>
