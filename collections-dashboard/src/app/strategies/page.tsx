@@ -129,7 +129,7 @@ export default function StrategiesPage() {
 
   return (
     <>
-      <AppHeader title="Strategies" description="Collection strategy designer" />
+      <AppHeader title="Chiến lược" description="Thiết kế chiến lược thu hồi" />
       <main className="flex-1 overflow-auto p-4 sm:p-6 lg:p-8">
         <div className="mx-auto max-w-7xl space-y-6">
           {/* Strategy KPIs */}

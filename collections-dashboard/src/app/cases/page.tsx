@@ -51,19 +51,19 @@ import {
 } from '@/components/ui/dropdown-menu';
 
 function formatCurrency(amount: number): string {
-  return new Intl.NumberFormat('en-US', {
+  return new Intl.NumberFormat('vi-VN', {
     style: 'currency',
-    currency: 'USD',
+    currency: 'VND',
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   }).format(amount);
 }
 
 function formatDate(dateStr: string): string {
-  return new Date(dateStr).toLocaleDateString('en-US', {
+  return new Date(dateStr).toLocaleDateString('vi-VN', {
     year: 'numeric',
-    month: 'short',
-    day: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
   });
 }
 
@@ -101,7 +101,7 @@ export default function CasesPage() {
 
   return (
     <>
-      <AppHeader title="Cases" description="Collection case management" />
+      <AppHeader title="Hồ sơ Thu hồi" description="Quản lý hồ sơ thu hồi nợ" />
       <main className="flex-1 overflow-auto p-4 sm:p-6 lg:p-8">
         <div className="mx-auto max-w-7xl space-y-6">
           {/* Summary Cards */}

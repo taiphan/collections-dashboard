@@ -4,13 +4,13 @@ export const CHANGELOG: VersionEntry[] = [
   {
     version: '2.0.0',
     date: '2026-05-31',
-    title: 'CLever Collection Hub',
+    title: 'FE CREDIT Collection Hub',
     changes: [
       'Full collection management platform with multi-page navigation',
       'Case management with detailed debtor profiles',
       'Strategy designer for collection workflows',
       'Advanced analytics with ML-powered insights',
-      'Multi-theme support (5 color themes + dark/light mode)',
+      'FE CREDIT corporate branding with dark/light mode',
       'Digital self-collection portal concept',
       'Monitoring & continuous improvement dashboard',
     ],

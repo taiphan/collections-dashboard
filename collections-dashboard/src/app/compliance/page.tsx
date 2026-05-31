@@ -9,7 +9,7 @@ import { Shield, CheckCircle2, AlertTriangle, Clock, FileText } from 'lucide-rea
 export default function CompliancePage() {
   return (
     <>
-      <AppHeader title="Compliance" description="Audit & regulatory compliance" />
+      <AppHeader title="Tuân thủ" description="Kiểm toán & tuân thủ quy định" />
       <main className="flex-1 overflow-auto p-4 sm:p-6 lg:p-8">
         <div className="mx-auto max-w-7xl space-y-6">
           {/* Compliance Score */}

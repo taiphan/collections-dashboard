@@ -47,7 +47,7 @@ export default function AgentsPage() {
 
   return (
     <>
-      <AppHeader title="Agents & Teams" description="Workforce management" />
+      <AppHeader title="Nhân viên & Nhóm" description="Quản lý nhân sự thu hồi" />
       <main className="flex-1 overflow-auto p-4 sm:p-6 lg:p-8">
         <div className="mx-auto max-w-7xl space-y-6">
           {/* KPIs */}

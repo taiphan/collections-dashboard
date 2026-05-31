@@ -18,7 +18,7 @@ export default function DashboardPage() {
 
   return (
     <>
-      <AppHeader title="Dashboard" description="Portfolio overview & KPIs" />
+      <AppHeader title="Dashboard" description="Tổng quan danh mục & KPIs" />
       <main className="flex-1 overflow-auto p-4 sm:p-6 lg:p-8">
         <div className="mx-auto max-w-7xl space-y-8">
           <DashboardHeader />

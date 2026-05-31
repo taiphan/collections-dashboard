@@ -80,7 +80,7 @@ export default function AnalyticsPage() {
 
   return (
     <>
-      <AppHeader title="Analytics" description="Advanced collection analytics & insights" />
+      <AppHeader title="Phân tích" description="Phân tích nâng cao & thông tin chi tiết" />
       <main className="flex-1 overflow-auto p-4 sm:p-6 lg:p-8">
         <div className="mx-auto max-w-7xl space-y-6">
           {/* KPI Summary */}

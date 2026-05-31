@@ -87,7 +87,7 @@ const STATUS_BADGE: Record<ScoringModel['status'], string> = {
 export default function ScoringPage() {
   return (
     <>
-      <AppHeader title="Scoring Models" description="ML model management" />
+      <AppHeader title="Mô hình Chấm điểm" description="Quản lý mô hình ML" />
       <main className="flex-1 overflow-auto p-4 sm:p-6 lg:p-8">
         <div className="mx-auto max-w-7xl space-y-6">
           {/* KPIs */}

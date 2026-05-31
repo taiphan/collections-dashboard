@@ -24,7 +24,7 @@ const DEMO_USERS: { username: string; password: string; user: User }[] = [
     user: {
       id: 'usr-001',
       username: 'admin',
-      name: 'System Admin',
+      name: 'Quản trị viên',
       role: 'admin',
     },
   },
@@ -34,7 +34,7 @@ const DEMO_USERS: { username: string; password: string; user: User }[] = [
     user: {
       id: 'usr-002',
       username: 'manager',
-      name: 'Pham Thi Mai',
+      name: 'Phạm Thị Mai',
       role: 'manager',
     },
   },
@@ -44,7 +44,7 @@ const DEMO_USERS: { username: string; password: string; user: User }[] = [
     user: {
       id: 'usr-003',
       username: 'collector',
-      name: 'Nguyen Minh Tuan',
+      name: 'Nguyễn Minh Tuấn',
       role: 'collector',
     },
   },
@@ -54,7 +54,7 @@ const DEMO_USERS: { username: string; password: string; user: User }[] = [
     user: {
       id: 'usr-004',
       username: 'viewer',
-      name: 'Le Van Duc',
+      name: 'Lê Văn Đức',
       role: 'viewer',
     },
   },
@@ -72,7 +72,7 @@ export const useAuthStore = create<AuthState>()(
         );
 
         if (!match) {
-          return { success: false, error: 'Invalid username or password' };
+          return { success: false, error: 'Tên đăng nhập hoặc mật khẩu không đúng' };
         }
 
         set({ user: match.user, isAuthenticated: true });

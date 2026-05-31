@@ -34,22 +34,22 @@ import { useAuthStore } from '@/lib/auth-store';
 
 const mainNavItems = [
   {
-    title: 'Dashboard',
+    title: 'Tổng quan',
     href: '/',
     icon: BarChart3,
   },
   {
-    title: 'Cases',
+    title: 'Hồ sơ Thu hồi',
     href: '/cases',
     icon: Briefcase,
   },
   {
-    title: 'Strategies',
+    title: 'Chiến lược',
     href: '/strategies',
     icon: GitBranch,
   },
   {
-    title: 'Analytics',
+    title: 'Phân tích',
     href: '/analytics',
     icon: LineChart,
   },
@@ -57,17 +57,17 @@ const mainNavItems = [
 
 const managementNavItems = [
   {
-    title: 'Agents & Teams',
+    title: 'Nhân viên & Nhóm',
     href: '/agents',
     icon: Users,
   },
   {
-    title: 'Scoring Models',
+    title: 'Mô hình Chấm điểm',
     href: '/scoring',
     icon: Zap,
   },
   {
-    title: 'Compliance',
+    title: 'Tuân thủ',
     href: '/compliance',
     icon: Shield,
   },
@@ -75,12 +75,12 @@ const managementNavItems = [
 
 const systemNavItems = [
   {
-    title: 'Settings',
+    title: 'Cài đặt',
     href: '/settings',
     icon: Settings,
   },
   {
-    title: 'About',
+    title: 'Giới thiệu',
     href: '/about',
     icon: Info,
   },
@@ -95,13 +95,15 @@ export function AppSidebar() {
       <SidebarHeader className="border-b border-sidebar-border">
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton size="lg" tooltip="CLever Collection Hub">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
-                <BarChart3 className="h-4 w-4 text-primary-foreground" aria-hidden="true" />
+            <SidebarMenuButton size="lg" tooltip="FE CREDIT Collection">
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-red-600 to-red-700">
+                <svg className="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
               </div>
               <div className="flex flex-col gap-0.5 leading-none">
-                <span className="font-semibold">CLever</span>
-                <span className="text-xs text-muted-foreground">Collection Hub</span>
+                <span className="font-semibold">FE CREDIT</span>
+                <span className="text-xs text-muted-foreground">Thu hồi Nợ</span>
               </div>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -110,7 +112,7 @@ export function AppSidebar() {
 
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Collection</SidebarGroupLabel>
+          <SidebarGroupLabel>Thu hồi Nợ</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {mainNavItems.map((item) => (
@@ -132,7 +134,7 @@ export function AppSidebar() {
         <SidebarSeparator />
 
         <SidebarGroup>
-          <SidebarGroupLabel>Management</SidebarGroupLabel>
+          <SidebarGroupLabel>Quản lý</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {managementNavItems.map((item) => (
@@ -154,7 +156,7 @@ export function AppSidebar() {
         <SidebarSeparator />
 
         <SidebarGroup>
-          <SidebarGroupLabel>System</SidebarGroupLabel>
+          <SidebarGroupLabel>Hệ thống</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {systemNavItems.map((item) => (
@@ -188,9 +190,9 @@ export function AppSidebar() {
             </SidebarMenuButton>
           </SidebarMenuItem>
           <SidebarMenuItem>
-            <SidebarMenuButton tooltip="Sign Out" onClick={logout}>
+            <SidebarMenuButton tooltip="Đăng xuất" onClick={logout}>
               <LogOut className="h-4 w-4" aria-hidden="true" />
-              <span className="text-xs">Sign Out</span>
+              <span className="text-xs">Đăng xuất</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>

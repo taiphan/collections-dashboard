@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { BarChart3, Eye, EyeOff, LogIn, AlertCircle } from 'lucide-react';
+import { Eye, EyeOff, LogIn, AlertCircle } from 'lucide-react';
 
 export function LoginForm() {
   const { login } = useAuthStore();
@@ -22,11 +22,11 @@ export function LoginForm() {
     setError('');
 
     if (!username.trim()) {
-      setError('Username is required');
+      setError('Vui lòng nhập tên đăng nhập');
       return;
     }
     if (!password.trim()) {
-      setError('Password is required');
+      setError('Vui lòng nhập mật khẩu');
       return;
     }
 
@@ -47,21 +47,23 @@ export function LoginForm() {
       <div className="w-full max-w-md space-y-6">
         {/* Logo & Title */}
         <div className="flex flex-col items-center gap-3 text-center">
-          <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-primary">
-            <BarChart3 className="h-7 w-7 text-primary-foreground" aria-hidden="true" />
+          <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-red-600 to-red-700 shadow-lg">
+            <svg className="h-7 w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
           </div>
           <div>
-            <h1 className="text-2xl font-bold tracking-tight">CLever</h1>
-            <p className="text-sm text-muted-foreground">Collection Management Platform</p>
+            <h1 className="text-2xl font-bold tracking-tight">FE CREDIT</h1>
+            <p className="text-sm text-muted-foreground">Hệ thống Quản lý Thu hồi Nợ</p>
           </div>
         </div>
 
         {/* Login Card */}
         <Card>
           <CardHeader className="text-center">
-            <CardTitle className="text-lg">Sign In</CardTitle>
+            <CardTitle className="text-lg">Đăng nhập</CardTitle>
             <CardDescription>
-              Enter your credentials to access the platform
+              Nhập thông tin đăng nhập để truy cập hệ thống
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -76,11 +78,11 @@ export function LoginForm() {
 
               {/* Username */}
               <div className="space-y-2">
-                <Label htmlFor="username">Username</Label>
+                <Label htmlFor="username">Tên đăng nhập</Label>
                 <Input
                   id="username"
                   type="text"
-                  placeholder="Enter your username"
+                  placeholder="Nhập tên đăng nhập"
                   value={username}
                   onChange={(e) => {
                     setUsername(e.target.value);
@@ -93,12 +95,12 @@ export function LoginForm() {
 
               {/* Password */}
               <div className="space-y-2">
-                <Label htmlFor="password">Password</Label>
+                <Label htmlFor="password">Mật khẩu</Label>
                 <div className="relative">
                   <Input
                     id="password"
                     type={showPassword ? 'text' : 'password'}
-                    placeholder="Enter your password"
+                    placeholder="Nhập mật khẩu"
                     value={password}
                     onChange={(e) => {
                       setPassword(e.target.value);
@@ -131,12 +133,12 @@ export function LoginForm() {
                 {isLoading ? (
                   <span className="flex items-center gap-2">
                     <span className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
-                    Signing in...
+                    Đang đăng nhập...
                   </span>
                 ) : (
                   <>
                     <LogIn className="h-4 w-4" aria-hidden="true" />
-                    Sign In
+                    Đăng nhập
                   </>
                 )}
               </Button>
@@ -148,7 +150,7 @@ export function LoginForm() {
         <Card className="border-dashed">
           <CardContent className="p-4">
             <p className="mb-3 text-center text-xs font-medium text-muted-foreground">
-              Demo Accounts
+              Tài khoản Demo
             </p>
             <div className="grid grid-cols-2 gap-2">
               {[

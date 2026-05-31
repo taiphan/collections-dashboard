@@ -19,7 +19,7 @@ export default function SettingsPage() {
 
   return (
     <>
-      <AppHeader title="Settings" description="Platform configuration" />
+      <AppHeader title="Cài đặt" description="Cấu hình hệ thống" />
       <main className="flex-1 overflow-auto p-4 sm:p-6 lg:p-8">
         <div className="mx-auto max-w-3xl space-y-8">
           {/* Theme Mode */}
