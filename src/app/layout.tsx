@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'CLever — Collection Management Platform',
-  description: 'Omnichannel collection hub for end-to-end debt recovery management',
+  title: 'FE CREDIT Collection — Hệ thống Quản lý Thu hồi Nợ',
+  description: 'Nền tảng quản lý thu hồi nợ đa kênh cho FE CREDIT. Theo dõi hồ sơ, chiến lược thu hồi, phân tích hiệu suất.',
 };
 
 export default function RootLayout({
@@ -27,7 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="vi"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >

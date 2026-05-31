@@ -34,22 +34,22 @@ import { useAuthStore } from '@/lib/auth-store';
 
 const mainNavItems = [
   {
-    title: 'Dashboard',
+    title: 'Tổng quan',
     href: '/',
     icon: BarChart3,
   },
   {
-    title: 'Cases',
+    title: 'Hồ sơ Thu hồi',
     href: '/cases',
     icon: Briefcase,
   },
   {
-    title: 'Strategies',
+    title: 'Chiến lược',
     href: '/strategies',
     icon: GitBranch,
   },
   {
-    title: 'Analytics',
+    title: 'Phân tích',
     href: '/analytics',
     icon: LineChart,
   },
@@ -57,17 +57,17 @@ const mainNavItems = [
 
 const managementNavItems = [
   {
-    title: 'Agents & Teams',
+    title: 'Nhân viên & Nhóm',
     href: '/agents',
     icon: Users,
   },
   {
-    title: 'Scoring Models',
+    title: 'Mô hình Chấm điểm',
     href: '/scoring',
     icon: Zap,
   },
   {
-    title: 'Compliance',
+    title: 'Tuân thủ',
     href: '/compliance',
     icon: Shield,
   },
@@ -75,12 +75,12 @@ const managementNavItems = [
 
 const systemNavItems = [
   {
-    title: 'Settings',
+    title: 'Cài đặt',
     href: '/settings',
     icon: Settings,
   },
   {
-    title: 'About',
+    title: 'Giới thiệu',
     href: '/about',
     icon: Info,
   },
@@ -95,13 +95,13 @@ export function AppSidebar() {
       <SidebarHeader className="border-b border-sidebar-border">
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton size="lg" tooltip="CLever Collection Hub">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
-                <BarChart3 className="h-4 w-4 text-primary-foreground" aria-hidden="true" />
+            <SidebarMenuButton size="lg" tooltip="FE CREDIT Collection">
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#E31837] shadow-md">
+                <span className="text-[10px] font-black text-white leading-none">FC</span>
               </div>
               <div className="flex flex-col gap-0.5 leading-none">
-                <span className="font-semibold">CLever</span>
-                <span className="text-xs text-muted-foreground">Collection Hub</span>
+                <span className="font-bold tracking-tight text-sidebar-foreground">FE CREDIT</span>
+                <span className="text-[10px] text-sidebar-foreground/60">Hệ thống Thu hồi Nợ</span>
               </div>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -110,7 +110,7 @@ export function AppSidebar() {
 
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Collection</SidebarGroupLabel>
+          <SidebarGroupLabel>Thu hồi Nợ</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {mainNavItems.map((item) => (
@@ -132,7 +132,7 @@ export function AppSidebar() {
         <SidebarSeparator />
 
         <SidebarGroup>
-          <SidebarGroupLabel>Management</SidebarGroupLabel>
+          <SidebarGroupLabel>Quản lý</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {managementNavItems.map((item) => (
@@ -154,7 +154,7 @@ export function AppSidebar() {
         <SidebarSeparator />
 
         <SidebarGroup>
-          <SidebarGroupLabel>System</SidebarGroupLabel>
+          <SidebarGroupLabel>Hệ thống</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {systemNavItems.map((item) => (
@@ -188,9 +188,9 @@ export function AppSidebar() {
             </SidebarMenuButton>
           </SidebarMenuItem>
           <SidebarMenuItem>
-            <SidebarMenuButton tooltip="Sign Out" onClick={logout}>
+            <SidebarMenuButton tooltip="Đăng xuất" onClick={logout}>
               <LogOut className="h-4 w-4" aria-hidden="true" />
-              <span className="text-xs">Sign Out</span>
+              <span className="text-xs">Đăng xuất</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>

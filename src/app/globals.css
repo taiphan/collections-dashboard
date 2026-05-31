@@ -48,73 +48,103 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
+/*
+ * FE CREDIT Theme — based on fecredit.com.vn
+ *
+ * Brand colors:
+ * - Primary Red: #E31837 (CTA buttons, logo accent)
+ * - Dark Navy: #1a1a2e (footer, sidebar)
+ * - Blue Accent: #1e3a5f (VPBank heritage)
+ * - Background: #ffffff (main), #f8f9fa (sections)
+ * - Text: #1a1a2e (body), #6c757d (muted)
+ */
+
+/* Light Theme (default — matches fecredit.com.vn) */
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.546 0.245 262.881);
-  --chart-2: oklch(0.681 0.162 75.834);
-  --chart-3: oklch(0.627 0.214 29.234);
-  --chart-4: oklch(0.541 0.281 293.009);
-  --chart-5: oklch(0.577 0.174 142.495);
+  --background: #ffffff;
+  --foreground: #1a1a2e;
+  --card: #ffffff;
+  --card-foreground: #1a1a2e;
+  --popover: #ffffff;
+  --popover-foreground: #1a1a2e;
+
+  --primary: #E31837;
+  --primary-foreground: #ffffff;
+
+  --secondary: #f0f4f8;
+  --secondary-foreground: #1e3a5f;
+
+  --muted: #f8f9fa;
+  --muted-foreground: #6c757d;
+
+  --accent: #eef2ff;
+  --accent-foreground: #1e3a5f;
+
+  --destructive: #dc2626;
+
+  --border: #e5e7eb;
+  --input: #e5e7eb;
+  --ring: #E31837;
+
+  --chart-1: #E31837;
+  --chart-2: #1e3a5f;
+  --chart-3: #10b981;
+  --chart-4: #f59e0b;
+  --chart-5: #8b5cf6;
+
   --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+
+  --sidebar: #1a1a2e;
+  --sidebar-foreground: #e8e8ed;
+  --sidebar-primary: #E31837;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #2a2a42;
+  --sidebar-accent-foreground: #e8e8ed;
+  --sidebar-border: rgba(255, 255, 255, 0.08);
+  --sidebar-ring: #E31837;
 }
 
+/* Dark Theme */
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --background: #0f0f1a;
+  --foreground: #e8e8ed;
+  --card: #1a1a2e;
+  --card-foreground: #e8e8ed;
+  --popover: #1a1a2e;
+  --popover-foreground: #e8e8ed;
+
+  --primary: #ef4444;
+  --primary-foreground: #ffffff;
+
+  --secondary: #1e1e32;
+  --secondary-foreground: #c8c8d4;
+
+  --muted: #1e1e32;
+  --muted-foreground: #8888a0;
+
+  --accent: #252540;
+  --accent-foreground: #c8c8d4;
+
+  --destructive: #ef4444;
+
+  --border: rgba(255, 255, 255, 0.1);
+  --input: rgba(255, 255, 255, 0.12);
+  --ring: #ef4444;
+
+  --chart-1: #ef4444;
+  --chart-2: #60a5fa;
+  --chart-3: #34d399;
+  --chart-4: #fbbf24;
+  --chart-5: #a78bfa;
+
+  --sidebar: #0a0a14;
+  --sidebar-foreground: #e8e8ed;
+  --sidebar-primary: #ef4444;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #1a1a2e;
+  --sidebar-accent-foreground: #e8e8ed;
+  --sidebar-border: rgba(255, 255, 255, 0.06);
+  --sidebar-ring: #ef4444;
 }
 
 @layer base {
@@ -127,8 +157,31 @@
   html {
     @apply font-sans;
   }
-  /* Smooth theme transitions */
   html {
     transition: background-color 200ms ease, color 200ms ease;
+  }
+}
+
+/* FE CREDIT brand utilities */
+@layer utilities {
+  .fecredit-gradient {
+    background: linear-gradient(135deg, #E31837 0%, #b91c1c 100%);
+  }
+}
+
+/* Custom scrollbar */
+@layer base {
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-border rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground/30;
   }
 }

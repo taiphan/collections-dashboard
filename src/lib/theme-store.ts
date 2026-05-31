@@ -3,7 +3,7 @@ import { persist } from 'zustand/middleware';
 
 export type ThemeMode = 'light' | 'dark' | 'system';
 
-export type ThemeColor = 'blue' | 'emerald' | 'violet' | 'amber' | 'rose';
+export type ThemeColor = 'fecredit' | 'blue' | 'emerald' | 'amber' | 'violet';
 
 export interface ThemeConfig {
   mode: ThemeMode;
@@ -11,30 +11,30 @@ export interface ThemeConfig {
 }
 
 export const THEME_COLORS: Record<ThemeColor, { label: string; primary: string; accent: string }> = {
+  fecredit: {
+    label: 'FE CREDIT',
+    primary: '#E31837',
+    accent: '#1e3a5f',
+  },
   blue: {
-    label: 'Ocean Blue',
-    primary: 'oklch(0.546 0.245 262.881)',
-    accent: 'oklch(0.681 0.162 75.834)',
+    label: 'VPBank Blue',
+    primary: '#1e3a5f',
+    accent: '#E31837',
   },
   emerald: {
     label: 'Emerald',
-    primary: 'oklch(0.577 0.174 142.495)',
-    accent: 'oklch(0.681 0.162 75.834)',
-  },
-  violet: {
-    label: 'Violet',
-    primary: 'oklch(0.541 0.281 293.009)',
-    accent: 'oklch(0.681 0.162 75.834)',
+    primary: '#10b981',
+    accent: '#1e3a5f',
   },
   amber: {
     label: 'Amber',
-    primary: 'oklch(0.681 0.162 75.834)',
-    accent: 'oklch(0.546 0.245 262.881)',
+    primary: '#f59e0b',
+    accent: '#1e3a5f',
   },
-  rose: {
-    label: 'Rose',
-    primary: 'oklch(0.577 0.245 27.325)',
-    accent: 'oklch(0.546 0.245 262.881)',
+  violet: {
+    label: 'Violet',
+    primary: '#8b5cf6',
+    accent: '#E31837',
   },
 };
 
@@ -48,8 +48,8 @@ export const useThemeStore = create<ThemeState>()(
   persist(
     (set) => ({
       config: {
-        mode: 'dark',
-        color: 'blue',
+        mode: 'light',
+        color: 'fecredit',
       },
       setMode: (mode) => set((state) => ({ config: { ...state.config, mode } })),
       setColor: (color) => set((state) => ({ config: { ...state.config, color } })),
