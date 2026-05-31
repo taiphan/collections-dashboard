@@ -1,0 +1,503 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================================
+// AUTH & USERS
+// ============================================================
+
+model User {
+  id            String    @id @default(uuid())
+  email         String    @unique
+  passwordHash  String    @map("password_hash")
+  firstName     String    @map("first_name")
+  lastName      String    @map("last_name")
+  role          UserRole  @default(LOAN_OFFICER)
+  department    String?
+  isActive      Boolean   @default(true) @map("is_active")
+  lastLoginAt   DateTime? @map("last_login_at")
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime  @updatedAt @map("updated_at")
+
+  assignedCases   Case[]          @relation("AssignedOfficer")
+  caseActivities  CaseActivity[]
+  decisions       Decision[]
+  comments        CaseComment[]
+
+  @@map("users")
+}
+
+enum UserRole {
+  ADMIN
+  MANAGER
+  UNDERWRITER
+  LOAN_OFFICER
+  COMPLIANCE_OFFICER
+  VIEWER
+}
+
+// ============================================================
+// CUSTOMER / APPLICANT
+// ============================================================
+
+model Customer {
+  id              String          @id @default(uuid())
+  customerType    CustomerType    @map("customer_type")
+  firstName       String          @map("first_name")
+  lastName        String          @map("last_name")
+  dateOfBirth     DateTime?       @map("date_of_birth")
+  nationalId      String?         @unique @map("national_id")
+  email           String?
+  phone           String?
+  address         Json?
+  employmentInfo  Json?           @map("employment_info")
+  financialInfo   Json?           @map("financial_info")
+  riskGrade       String?         @map("risk_grade")
+  kycStatus       KycStatus       @default(PENDING) @map("kyc_status")
+  kycVerifiedAt   DateTime?       @map("kyc_verified_at")
+  createdAt       DateTime        @default(now()) @map("created_at")
+  updatedAt       DateTime        @updatedAt @map("updated_at")
+
+  applications    Application[]
+  documents       Document[]
+
+  @@index([nationalId])
+  @@index([email])
+  @@index([phone])
+  @@map("customers")
+}
+
+enum CustomerType {
+  INDIVIDUAL
+  CORPORATE
+}
+
+enum KycStatus {
+  PENDING
+  IN_PROGRESS
+  VERIFIED
+  REJECTED
+  EXPIRED
+}
+
+// ============================================================
+// LOAN PRODUCT CATALOG
+// ============================================================
+
+model LoanProduct {
+  id                String        @id @default(uuid())
+  code              String        @unique
+  name              String
+  description       String?
+  productType       ProductType   @map("product_type")
+  minAmount         Decimal       @map("min_amount") @db.Decimal(15, 2)
+  maxAmount         Decimal       @map("max_amount") @db.Decimal(15, 2)
+  minTenureMonths   Int           @map("min_tenure_months")
+  maxTenureMonths   Int           @map("max_tenure_months")
+  baseInterestRate  Decimal       @map("base_interest_rate") @db.Decimal(5, 4)
+  interestType      InterestType  @map("interest_type")
+  fees              Json?
+  eligibilityCriteria Json?       @map("eligibility_criteria")
+  requiredDocuments Json?         @map("required_documents")
+  isActive          Boolean       @default(true) @map("is_active")
+  effectiveFrom     DateTime      @map("effective_from")
+  effectiveTo       DateTime?     @map("effective_to")
+  createdAt         DateTime      @default(now()) @map("created_at")
+  updatedAt         DateTime      @updatedAt @map("updated_at")
+
+  applications      Application[]
+
+  @@map("loan_products")
+}
+
+enum ProductType {
+  PERSONAL
+  MORTGAGE
+  AUTO
+  SME
+  COMMERCIAL
+  CREDIT_LINE
+}
+
+enum InterestType {
+  FIXED
+  VARIABLE
+  HYBRID
+}
+
+// ============================================================
+// APPLICATION
+// ============================================================
+
+model Application {
+  id                String            @id @default(uuid())
+  applicationNumber String            @unique @map("application_number")
+  customerId        String            @map("customer_id")
+  productId         String            @map("product_id")
+  requestedAmount   Decimal           @map("requested_amount") @db.Decimal(15, 2)
+  requestedTenure   Int               @map("requested_tenure")
+  purpose           String?
+  channel           ApplicationChannel
+  status            ApplicationStatus @default(DRAFT)
+  submittedAt       DateTime?         @map("submitted_at")
+  completedAt       DateTime?         @map("completed_at")
+  metadata          Json?
+  createdAt         DateTime          @default(now()) @map("created_at")
+  updatedAt         DateTime          @updatedAt @map("updated_at")
+
+  customer          Customer          @relation(fields: [customerId], references: [id])
+  product           LoanProduct       @relation(fields: [productId], references: [id])
+  case              Case?
+  coApplicants      CoApplicant[]
+  documents         Document[]
+
+  @@index([customerId])
+  @@index([status])
+  @@index([applicationNumber])
+  @@map("applications")
+}
+
+enum ApplicationChannel {
+  WEB
+  MOBILE
+  BRANCH
+  API
+}
+
+enum ApplicationStatus {
+  DRAFT
+  SUBMITTED
+  IN_PROGRESS
+  APPROVED
+  REJECTED
+  WITHDRAWN
+  DISBURSED
+  CLOSED
+}
+
+model CoApplicant {
+  id              String      @id @default(uuid())
+  applicationId   String      @map("application_id")
+  firstName       String      @map("first_name")
+  lastName        String      @map("last_name")
+  relationship    String
+  nationalId      String?     @map("national_id")
+  income          Decimal?    @db.Decimal(15, 2)
+  createdAt       DateTime    @default(now()) @map("created_at")
+
+  application     Application @relation(fields: [applicationId], references: [id])
+
+  @@map("co_applicants")
+}
+
+// ============================================================
+// CASE MANAGEMENT
+// ============================================================
+
+model Case {
+  id              String        @id @default(uuid())
+  caseNumber      String        @unique @map("case_number")
+  applicationId   String        @unique @map("application_id")
+  assignedTo      String?       @map("assigned_to")
+  currentStage    CaseStage     @default(INTAKE) @map("current_stage")
+  status          CaseStatus    @default(OPEN)
+  priority        CasePriority  @default(NORMAL)
+  slaDeadline     DateTime?     @map("sla_deadline")
+  slaBreached     Boolean       @default(false) @map("sla_breached")
+  startedAt       DateTime      @default(now()) @map("started_at")
+  completedAt     DateTime?     @map("completed_at")
+  metadata        Json?
+  createdAt       DateTime      @default(now()) @map("created_at")
+  updatedAt       DateTime      @updatedAt @map("updated_at")
+
+  application     Application   @relation(fields: [applicationId], references: [id])
+  assignedOfficer User?         @relation("AssignedOfficer", fields: [assignedTo], references: [id])
+  activities      CaseActivity[]
+  stageHistory    StageHistory[]
+  tasks           CaseTask[]
+  decisions       Decision[]
+  comments        CaseComment[]
+
+  @@index([currentStage])
+  @@index([status])
+  @@index([assignedTo])
+  @@index([slaDeadline])
+  @@map("cases")
+}
+
+enum CaseStage {
+  INTAKE
+  VERIFICATION
+  UNDERWRITING
+  APPROVAL
+  DOCUMENTATION
+  DISBURSEMENT
+  CLOSED
+}
+
+enum CaseStatus {
+  OPEN
+  IN_PROGRESS
+  ON_HOLD
+  ESCALATED
+  COMPLETED
+  CANCELLED
+}
+
+enum CasePriority {
+  LOW
+  NORMAL
+  HIGH
+  URGENT
+}
+
+model StageHistory {
+  id          String    @id @default(uuid())
+  caseId      String    @map("case_id")
+  fromStage   CaseStage @map("from_stage")
+  toStage     CaseStage @map("to_stage")
+  changedBy   String    @map("changed_by")
+  reason      String?
+  duration    Int?      // duration in minutes spent in previous stage
+  createdAt   DateTime  @default(now()) @map("created_at")
+
+  case        Case      @relation(fields: [caseId], references: [id])
+
+  @@index([caseId])
+  @@map("stage_history")
+}
+
+model CaseTask {
+  id          String      @id @default(uuid())
+  caseId      String      @map("case_id")
+  stage       CaseStage
+  title       String
+  description String?
+  taskType    TaskType    @map("task_type")
+  status      TaskStatus  @default(PENDING)
+  assignedTo  String?     @map("assigned_to")
+  dueDate     DateTime?   @map("due_date")
+  completedAt DateTime?   @map("completed_at")
+  result      Json?
+  sortOrder   Int         @default(0) @map("sort_order")
+  createdAt   DateTime    @default(now()) @map("created_at")
+  updatedAt   DateTime    @updatedAt @map("updated_at")
+
+  case        Case        @relation(fields: [caseId], references: [id])
+
+  @@index([caseId, stage])
+  @@index([status])
+  @@map("case_tasks")
+}
+
+enum TaskType {
+  MANUAL
+  AUTOMATED
+  APPROVAL
+  DOCUMENT_REVIEW
+  VERIFICATION
+}
+
+enum TaskStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  SKIPPED
+  FAILED
+}
+
+model CaseActivity {
+  id          String        @id @default(uuid())
+  caseId      String        @map("case_id")
+  userId      String?       @map("user_id")
+  activityType ActivityType @map("activity_type")
+  description String
+  metadata    Json?
+  createdAt   DateTime      @default(now()) @map("created_at")
+
+  case        Case          @relation(fields: [caseId], references: [id])
+  user        User?         @relation(fields: [userId], references: [id])
+
+  @@index([caseId])
+  @@map("case_activities")
+}
+
+enum ActivityType {
+  STAGE_CHANGE
+  STATUS_CHANGE
+  ASSIGNMENT
+  COMMENT
+  DOCUMENT_UPLOAD
+  DECISION_MADE
+  TASK_COMPLETED
+  SLA_WARNING
+  SLA_BREACH
+  ESCALATION
+  COMPLIANCE_CHECK
+  DISBURSEMENT
+}
+
+model CaseComment {
+  id        String   @id @default(uuid())
+  caseId    String   @map("case_id")
+  userId    String   @map("user_id")
+  content   String
+  isInternal Boolean @default(true) @map("is_internal")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  case      Case     @relation(fields: [caseId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+
+  @@index([caseId])
+  @@map("case_comments")
+}
+
+// ============================================================
+// DECISION ENGINE
+// ============================================================
+
+model Decision {
+  id            String          @id @default(uuid())
+  caseId        String          @map("case_id")
+  decisionType  DecisionType    @map("decision_type")
+  outcome       DecisionOutcome
+  score         Int?
+  reasoning     Json?
+  conditions    Json?
+  decidedBy     String?         @map("decided_by")
+  isAutomated   Boolean         @default(false) @map("is_automated")
+  createdAt     DateTime        @default(now()) @map("created_at")
+
+  case          Case            @relation(fields: [caseId], references: [id])
+  decidedByUser User?           @relation(fields: [decidedBy], references: [id])
+
+  @@index([caseId])
+  @@map("decisions")
+}
+
+enum DecisionType {
+  PRE_QUALIFICATION
+  CREDIT_CHECK
+  UNDERWRITING
+  FINAL_APPROVAL
+  EXCEPTION
+}
+
+enum DecisionOutcome {
+  APPROVED
+  REJECTED
+  REFERRED
+  CONDITIONAL
+}
+
+model DecisionRule {
+  id          String    @id @default(uuid())
+  ruleSetId   String    @map("rule_set_id")
+  name        String
+  description String?
+  condition   Json      // JSON-based rule condition
+  action      Json      // JSON-based rule action
+  priority    Int       @default(0)
+  isActive    Boolean   @default(true) @map("is_active")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+
+  ruleSet     DecisionRuleSet @relation(fields: [ruleSetId], references: [id])
+
+  @@index([ruleSetId])
+  @@map("decision_rules")
+}
+
+model DecisionRuleSet {
+  id          String          @id @default(uuid())
+  name        String          @unique
+  description String?
+  version     Int             @default(1)
+  isActive    Boolean         @default(true) @map("is_active")
+  createdAt   DateTime        @default(now()) @map("created_at")
+  updatedAt   DateTime        @updatedAt @map("updated_at")
+
+  rules       DecisionRule[]
+
+  @@map("decision_rule_sets")
+}
+
+// ============================================================
+// DOCUMENTS
+// ============================================================
+
+model Document {
+  id              String          @id @default(uuid())
+  applicationId   String?         @map("application_id")
+  customerId      String?         @map("customer_id")
+  documentType    String          @map("document_type")
+  fileName        String          @map("file_name")
+  fileSize        Int             @map("file_size")
+  mimeType        String          @map("mime_type")
+  storagePath     String          @map("storage_path")
+  status          DocumentStatus  @default(PENDING)
+  verifiedBy      String?         @map("verified_by")
+  verifiedAt      DateTime?       @map("verified_at")
+  expiresAt       DateTime?       @map("expires_at")
+  metadata        Json?
+  createdAt       DateTime        @default(now()) @map("created_at")
+  updatedAt       DateTime        @updatedAt @map("updated_at")
+
+  application     Application?    @relation(fields: [applicationId], references: [id])
+  customer        Customer?       @relation(fields: [customerId], references: [id])
+
+  @@index([applicationId])
+  @@index([customerId])
+  @@map("documents")
+}
+
+enum DocumentStatus {
+  PENDING
+  UPLOADED
+  VERIFIED
+  REJECTED
+  EXPIRED
+}
+
+// ============================================================
+// WORKFLOW CONFIGURATION
+// ============================================================
+
+model WorkflowTemplate {
+  id          String    @id @default(uuid())
+  name        String    @unique
+  description String?
+  productType ProductType @map("product_type")
+  stages      Json      // Array of stage configurations
+  isActive    Boolean   @default(true) @map("is_active")
+  version     Int       @default(1)
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+
+  @@map("workflow_templates")
+}
+
+// ============================================================
+// SLA CONFIGURATION
+// ============================================================
+
+model SlaConfig {
+  id              String      @id @default(uuid())
+  stage           CaseStage
+  productType     ProductType @map("product_type")
+  warningHours    Int         @map("warning_hours")
+  breachHours     Int         @map("breach_hours")
+  escalateTo      UserRole    @map("escalate_to")
+  isActive        Boolean     @default(true) @map("is_active")
+  createdAt       DateTime    @default(now()) @map("created_at")
+  updatedAt       DateTime    @updatedAt @map("updated_at")
+
+  @@unique([stage, productType])
+  @@map("sla_configs")
+}

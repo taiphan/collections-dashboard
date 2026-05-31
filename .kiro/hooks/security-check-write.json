@@ -1,0 +1,13 @@
+{
+  "name": "Security Check on Write",
+  "version": "1.0.0",
+  "description": "Verify write operations follow security rules — no hardcoded secrets, proper validation",
+  "when": {
+    "type": "preToolUse",
+    "toolTypes": ["write"]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Before writing this file, verify: 1) No hardcoded secrets, API keys, or passwords. 2) No sensitive data in logs. 3) All user inputs are validated with Zod. 4) SQL queries use Prisma (no raw string concatenation). 5) No eval() or Function() with user input. If any violation is found, DENY the write and explain why."
+  }
+}

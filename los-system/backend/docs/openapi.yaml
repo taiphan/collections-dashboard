@@ -1,0 +1,445 @@
+openapi: 3.0.3
+info:
+  title: Loan Origination System API
+  version: 1.0.0
+  description: |
+    RESTful API for the Loan Origination System (LOS).
+    Handles the full loan lifecycle from application to disbursement,
+    including pre-screening, credit decisions, compliance, ESG scoring,
+    and open banking integration.
+  contact:
+    name: LOS Engineering Team
+  license:
+    name: MIT
+
+servers:
+  - url: http://localhost:4000/api/v1
+    description: Local development
+  - url: https://staging-api.los.example.com/api/v1
+    description: Staging
+  - url: https://api.los.example.com/api/v1
+    description: Production
+
+security:
+  - BearerAuth: []
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT access token (15min expiry)
+
+  schemas:
+    Error:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+        message:
+          type: string
+        error:
+          type: string
+
+    PaginatedResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items: {}
+        meta:
+          type: object
+          properties:
+            total:
+              type: integer
+            page:
+              type: integer
+            pageSize:
+              type: integer
+            totalPages:
+              type: integer
+
+    LoginRequest:
+      type: object
+      required: [email, password]
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          minLength: 8
+
+    TokenResponse:
+      type: object
+      properties:
+        accessToken:
+          type: string
+        refreshToken:
+          type: string
+        expiresIn:
+          type: integer
+
+    Application:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        customerId:
+          type: string
+        productId:
+          type: string
+        requestedAmount:
+          type: number
+        status:
+          type: string
+          enum: [DRAFT, SUBMITTED, IN_REVIEW, APPROVED, REJECTED, DISBURSED]
+        createdAt:
+          type: string
+          format: date-time
+
+    PreScreeningRequest:
+      type: object
+      required: [productId, applicantData]
+      properties:
+        productId:
+          type: string
+        applicantData:
+          type: object
+          properties:
+            age:
+              type: integer
+            monthlyIncome:
+              type: number
+            employmentStatus:
+              type: string
+            existingDebt:
+              type: number
+            creditScore:
+              type: integer
+        consentForBureauCheck:
+          type: boolean
+        consentForOpenBanking:
+          type: boolean
+
+    PreScreeningResult:
+      type: object
+      properties:
+        id:
+          type: string
+        eligible:
+          type: boolean
+        score:
+          type: integer
+        maxEligibleAmount:
+          type: number
+        indicativeRate:
+          type: number
+        reasons:
+          type: array
+          items:
+            type: string
+
+    EsgScore:
+      type: object
+      properties:
+        overall:
+          type: integer
+        environmental:
+          type: integer
+        social:
+          type: integer
+        governance:
+          type: integer
+        grade:
+          type: string
+          enum: [A, B, C, D, E]
+        pricingAdjustment:
+          type: number
+
+    ComplianceResult:
+      type: object
+      properties:
+        passed:
+          type: boolean
+        overallRisk:
+          type: string
+          enum: [LOW, MEDIUM, HIGH, CRITICAL]
+        flags:
+          type: array
+          items:
+            type: string
+
+paths:
+  /auth/login:
+    post:
+      summary: Authenticate user
+      tags: [Auth]
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Successful login
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+        '401':
+          description: Invalid credentials
+
+  /auth/refresh:
+    post:
+      summary: Refresh access token
+      tags: [Auth]
+      security: []
+      responses:
+        '200':
+          description: New token pair
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+
+  /applications:
+    get:
+      summary: List loan applications
+      tags: [Applications]
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+        - name: pageSize
+          in: query
+          schema:
+            type: integer
+        - name: status
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Paginated list of applications
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedResponse'
+    post:
+      summary: Create new loan application
+      tags: [Applications]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Application'
+      responses:
+        '201':
+          description: Application created
+        '400':
+          description: Validation error
+
+  /applications/{id}:
+    get:
+      summary: Get application by ID
+      tags: [Applications]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Application details
+        '404':
+          description: Not found
+
+  /cases:
+    get:
+      summary: List cases
+      tags: [Cases]
+      responses:
+        '200':
+          description: Paginated list of cases
+
+  /cases/{id}:
+    get:
+      summary: Get case details
+      tags: [Cases]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Case details with timeline
+
+  /customers:
+    get:
+      summary: List customers
+      tags: [Customers]
+      responses:
+        '200':
+          description: Paginated list of customers
+    post:
+      summary: Create customer
+      tags: [Customers]
+      responses:
+        '201':
+          description: Customer created
+
+  /customers/{id}:
+    get:
+      summary: Get customer profile
+      tags: [Customers]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Customer profile
+
+  /pre-screening:
+    post:
+      summary: Run pre-screening assessment
+      tags: [Pre-Screening]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PreScreeningRequest'
+      responses:
+        '200':
+          description: Pre-screening result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreScreeningResult'
+
+  /strategies:
+    get:
+      summary: List decision strategies
+      tags: [Strategies]
+      responses:
+        '200':
+          description: List of active strategies
+    post:
+      summary: Create decision strategy
+      tags: [Strategies]
+      responses:
+        '201':
+          description: Strategy created
+
+  /open-banking/connect:
+    post:
+      summary: Initiate bank connection
+      tags: [Open Banking]
+      responses:
+        '200':
+          description: Connection initiated with consent URL
+
+  /open-banking/affordability/{customerId}:
+    get:
+      summary: Get affordability assessment
+      tags: [Open Banking]
+      parameters:
+        - name: customerId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Affordability assessment result
+
+  /esg/score:
+    post:
+      summary: Calculate ESG score
+      tags: [ESG]
+      responses:
+        '200':
+          description: ESG score result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EsgScore'
+
+  /compliance/screen:
+    post:
+      summary: Run compliance screening
+      tags: [Compliance]
+      responses:
+        '200':
+          description: Compliance check result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ComplianceResult'
+
+  /compliance/audit/{caseId}:
+    get:
+      summary: Get compliance audit trail
+      tags: [Compliance]
+      parameters:
+        - name: caseId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Audit trail entries
+
+  /disbursements:
+    post:
+      summary: Initiate disbursement
+      tags: [Disbursements]
+      responses:
+        '201':
+          description: Disbursement initiated
+        '400':
+          description: Validation error
+
+  /disbursements/{id}:
+    get:
+      summary: Get disbursement status
+      tags: [Disbursements]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Disbursement details
+
+  /reports/portfolio:
+    get:
+      summary: Get portfolio summary report
+      tags: [Reports]
+      responses:
+        '200':
+          description: Portfolio analytics
+
+  /reports/pipeline:
+    get:
+      summary: Get pipeline report
+      tags: [Reports]
+      responses:
+        '200':
+          description: Pipeline metrics and funnel data

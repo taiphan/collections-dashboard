@@ -1,0 +1,26 @@
+account_id,customer_name,bucket,outstanding_amount,due_date,status,notes
+ACC-001,Nguyen Van A,B1,5000000,2024-02-15,pending,First contact needed
+ACC-002,Tran Thi B,B1,3200000,2024-02-20,contacted,Left voicemail
+ACC-003,Le Van C,B1,7800000,2024-02-10,pending,New delinquency
+ACC-004,Pham Thi D,B1,2100000,2024-02-28,paid,Paid in full
+ACC-005,Hoang Van E,B1,4500000,2024-02-18,promised,Will pay by March 5
+ACC-006,Vo Thi F,B2,12000000,2024-01-20,contacted,Called twice - no answer
+ACC-007,Dang Van G,B2,8900000,2024-01-15,pending,Sent reminder letter
+ACC-008,Bui Thi H,B2,6500000,2024-01-25,promised,Partial payment plan agreed
+ACC-009,Ngo Van I,B2,15600000,2024-01-10,contacted,Negotiating settlement
+ACC-010,Do Thi K,B2,4200000,2024-01-30,paid,Settled at 90%
+ACC-011,Truong Van L,B3,25000000,2024-12-10,pending,Escalated to senior collector
+ACC-012,Ly Thi M,B3,18500000,2023-12-15,contacted,Dispute raised by customer
+ACC-013,Cao Van N,B3,9800000,2023-12-20,promised,Payment plan: 3 installments
+ACC-014,Dinh Thi O,B3,32000000,2023-12-05,pending,Legal notice sent
+ACC-015,Vuong Van P,B3,14200000,2023-12-18,contacted,Customer requested extension
+ACC-016,Mai Thi Q,B4,45000000,2023-11-05,pending,Pre-legal stage
+ACC-017,Lam Van R,B4,28000000,2023-11-12,contacted,Attorney letter sent
+ACC-018,Huynh Thi S,B4,52000000,2023-10-28,pending,Asset investigation ongoing
+ACC-019,Phan Van T,B4,19500000,2023-11-20,written-off,Customer declared insolvent
+ACC-020,Trinh Thi U,B4,36000000,2023-10-15,contacted,Court filing prepared
+ACC-021,Son Van V,B5,68000000,2023-09-01,written-off,Bankruptcy confirmed
+ACC-022,Duong Thi W,B5,42000000,2023-08-15,pending,Recovery unlikely - under review
+ACC-023,Ta Van X,B5,55000000,2023-07-20,written-off,No recoverable assets
+ACC-024,Chu Thi Y,B5,31000000,2023-09-10,contacted,Debt sale candidate
+ACC-025,Lac Van Z,B5,78000000,2023-06-01,written-off,Statute of limitations approaching

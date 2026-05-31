@@ -1,0 +1,13 @@
+{
+  "name": "Review Before Shell Commands",
+  "version": "1.0.0",
+  "description": "Review git commit and push commands to ensure they follow workflow rules",
+  "when": {
+    "type": "preToolUse",
+    "toolTypes": ["shell"]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "If this shell command involves git commit or git push: 1) Verify the commit message follows Conventional Commits format (type(scope): description). 2) Ensure we're NOT pushing directly to main/master. 3) Verify no .env files or secrets are being staged. If the command is not git-related, proceed normally."
+  }
+}
