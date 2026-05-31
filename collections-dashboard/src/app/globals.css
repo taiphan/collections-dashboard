@@ -48,75 +48,112 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-/* FE CREDIT Light Theme — Corporate Red & Blue */
+/*
+ * FE CREDIT Theme — based on fecredit.com.vn
+ *
+ * Brand colors extracted from the website:
+ * - Primary Red: #E31837 (CTA buttons, logo accent)
+ * - Dark Navy: #1a1a2e (footer, sidebar, dark sections)
+ * - Blue Accent: #1e3a5f (VPBank heritage)
+ * - Background: #ffffff (main), #f8f9fa (sections)
+ * - Text: #1a1a1a (body), #6c757d (muted)
+ */
+
+/* Light Theme (default — matches fecredit.com.vn) */
 :root {
-  --background: oklch(0.985 0.005 15);
-  --foreground: oklch(0.17 0.02 15);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.17 0.02 15);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.17 0.02 15);
-  --primary: oklch(0.52 0.22 25);
-  --primary-foreground: oklch(0.99 0.005 15);
-  --secondary: oklch(0.95 0.01 250);
-  --secondary-foreground: oklch(0.25 0.05 250);
-  --muted: oklch(0.96 0.005 15);
-  --muted-foreground: oklch(0.5 0.02 15);
-  --accent: oklch(0.94 0.015 250);
-  --accent-foreground: oklch(0.2 0.04 250);
-  --destructive: oklch(0.55 0.22 25);
-  --border: oklch(0.91 0.01 15);
-  --input: oklch(0.91 0.01 15);
-  --ring: oklch(0.52 0.22 25);
-  --chart-1: oklch(0.52 0.22 25);
-  --chart-2: oklch(0.55 0.2 250);
-  --chart-3: oklch(0.65 0.15 145);
-  --chart-4: oklch(0.7 0.15 60);
-  --chart-5: oklch(0.55 0.18 310);
+  /* Core */
+  --background: #ffffff;
+  --foreground: #1a1a2e;
+  --card: #ffffff;
+  --card-foreground: #1a1a2e;
+  --popover: #ffffff;
+  --popover-foreground: #1a1a2e;
+
+  /* Brand Red — #E31837 */
+  --primary: #E31837;
+  --primary-foreground: #ffffff;
+
+  /* Secondary — light blue-gray */
+  --secondary: #f0f4f8;
+  --secondary-foreground: #1e3a5f;
+
+  /* Muted — light gray sections like fecredit.com.vn */
+  --muted: #f8f9fa;
+  --muted-foreground: #6c757d;
+
+  /* Accent — subtle blue tint (VPBank) */
+  --accent: #eef2ff;
+  --accent-foreground: #1e3a5f;
+
+  /* Destructive */
+  --destructive: #dc2626;
+
+  /* Borders & inputs */
+  --border: #e5e7eb;
+  --input: #e5e7eb;
+  --ring: #E31837;
+
+  /* Charts */
+  --chart-1: #E31837;
+  --chart-2: #1e3a5f;
+  --chart-3: #10b981;
+  --chart-4: #f59e0b;
+  --chart-5: #8b5cf6;
+
   --radius: 0.625rem;
-  --sidebar: oklch(0.18 0.03 15);
-  --sidebar-foreground: oklch(0.95 0.01 15);
-  --sidebar-primary: oklch(0.6 0.2 25);
-  --sidebar-primary-foreground: oklch(0.99 0.005 15);
-  --sidebar-accent: oklch(0.25 0.04 15);
-  --sidebar-accent-foreground: oklch(0.95 0.01 15);
-  --sidebar-border: oklch(0.95 0.01 15 / 12%);
-  --sidebar-ring: oklch(0.6 0.2 25);
+
+  /* Sidebar — dark navy like fecredit.com.vn footer */
+  --sidebar: #1a1a2e;
+  --sidebar-foreground: #e8e8ed;
+  --sidebar-primary: #E31837;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #2a2a42;
+  --sidebar-accent-foreground: #e8e8ed;
+  --sidebar-border: rgba(255, 255, 255, 0.08);
+  --sidebar-ring: #E31837;
 }
 
-/* FE CREDIT Dark Theme */
+/* Dark Theme */
 .dark {
-  --background: oklch(0.14 0.02 15);
-  --foreground: oklch(0.95 0.01 15);
-  --card: oklch(0.18 0.025 15);
-  --card-foreground: oklch(0.95 0.01 15);
-  --popover: oklch(0.18 0.025 15);
-  --popover-foreground: oklch(0.95 0.01 15);
-  --primary: oklch(0.6 0.2 25);
-  --primary-foreground: oklch(0.99 0.005 15);
-  --secondary: oklch(0.23 0.03 250);
-  --secondary-foreground: oklch(0.9 0.01 250);
-  --muted: oklch(0.23 0.02 15);
-  --muted-foreground: oklch(0.65 0.03 15);
-  --accent: oklch(0.26 0.04 250);
-  --accent-foreground: oklch(0.95 0.01 250);
-  --destructive: oklch(0.65 0.2 25);
-  --border: oklch(0.95 0.02 15 / 12%);
-  --input: oklch(0.95 0.02 15 / 15%);
-  --ring: oklch(0.6 0.2 25);
-  --chart-1: oklch(0.6 0.2 25);
-  --chart-2: oklch(0.6 0.18 250);
-  --chart-3: oklch(0.7 0.15 145);
-  --chart-4: oklch(0.75 0.12 60);
-  --chart-5: oklch(0.6 0.15 310);
-  --sidebar: oklch(0.12 0.02 15);
-  --sidebar-foreground: oklch(0.95 0.01 15);
-  --sidebar-primary: oklch(0.6 0.2 25);
-  --sidebar-primary-foreground: oklch(0.99 0.005 15);
-  --sidebar-accent: oklch(0.23 0.03 15);
-  --sidebar-accent-foreground: oklch(0.95 0.01 15);
-  --sidebar-border: oklch(0.95 0.02 15 / 10%);
-  --sidebar-ring: oklch(0.6 0.2 25);
+  --background: #0f0f1a;
+  --foreground: #e8e8ed;
+  --card: #1a1a2e;
+  --card-foreground: #e8e8ed;
+  --popover: #1a1a2e;
+  --popover-foreground: #e8e8ed;
+
+  --primary: #ef4444;
+  --primary-foreground: #ffffff;
+
+  --secondary: #1e1e32;
+  --secondary-foreground: #c8c8d4;
+
+  --muted: #1e1e32;
+  --muted-foreground: #8888a0;
+
+  --accent: #252540;
+  --accent-foreground: #c8c8d4;
+
+  --destructive: #ef4444;
+
+  --border: rgba(255, 255, 255, 0.1);
+  --input: rgba(255, 255, 255, 0.12);
+  --ring: #ef4444;
+
+  --chart-1: #ef4444;
+  --chart-2: #60a5fa;
+  --chart-3: #34d399;
+  --chart-4: #fbbf24;
+  --chart-5: #a78bfa;
+
+  --sidebar: #0a0a14;
+  --sidebar-foreground: #e8e8ed;
+  --sidebar-primary: #ef4444;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #1a1a2e;
+  --sidebar-accent-foreground: #e8e8ed;
+  --sidebar-border: rgba(255, 255, 255, 0.06);
+  --sidebar-ring: #ef4444;
 }
 
 @layer base {
@@ -138,17 +175,17 @@
 /* FE CREDIT brand utilities */
 @layer utilities {
   .fecredit-gradient {
-    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+    background: linear-gradient(135deg, #E31837 0%, #b91c1c 100%);
   }
   .fecredit-text-gradient {
-    background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+    background: linear-gradient(135deg, #E31837 0%, #991b1b 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 }
 
-/* Custom scrollbar — subtle for corporate feel */
+/* Custom scrollbar */
 @layer base {
   ::-webkit-scrollbar {
     width: 6px;

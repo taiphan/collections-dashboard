@@ -95,7 +95,7 @@ export function AppSidebar() {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" tooltip="FE CREDIT Collection">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-red-500 to-red-700 shadow-md">
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#E31837] shadow-md">
                 <span className="text-[10px] font-black text-white leading-none">FC</span>
               </div>
               <div className="flex flex-col gap-0.5 leading-none">
@@ -191,8 +191,8 @@ export function AppSidebar() {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton tooltip={user?.name || 'User'}>
-              <div className="flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br from-red-500/20 to-red-600/10 border border-red-500/20">
-                <User className="h-3 w-3 text-red-500" aria-hidden="true" />
+              <div className="flex h-6 w-6 items-center justify-center rounded-full bg-[#E31837]/10 border border-[#E31837]/20">
+                <User className="h-3 w-3 text-[#E31837]" aria-hidden="true" />
               </div>
               <div className="flex flex-col gap-0 leading-none">
                 <span className="text-xs font-medium">{user?.name}</span>

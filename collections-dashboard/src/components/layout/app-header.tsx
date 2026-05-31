@@ -20,7 +20,7 @@ export function AppHeader({ title, description }: AppHeaderProps) {
   return (
     <div className="shrink-0">
       {/* Red accent stripe — FE CREDIT brand identity */}
-      <div className="h-1 bg-gradient-to-r from-red-600 via-red-500 to-red-600" />
+      <div className="h-1 bg-[#E31837]" />
 
       <header className="flex h-14 items-center gap-2 border-b bg-card px-4">
         <SidebarTrigger className="cursor-pointer" />
@@ -73,8 +73,8 @@ export function AppHeader({ title, description }: AppHeaderProps) {
           {/* User avatar */}
           <Separator orientation="vertical" className="h-5" />
           <div className="flex items-center gap-2">
-            <div className="flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-br from-red-500/20 to-red-600/10 border border-red-500/20">
-              <span className="text-[10px] font-semibold text-red-600 dark:text-red-400">
+            <div className="flex h-7 w-7 items-center justify-center rounded-full bg-[#E31837]/10 border border-[#E31837]/20">
+              <span className="text-[10px] font-semibold text-[#E31837]">
                 {user?.name?.charAt(0) || 'U'}
               </span>
             </div>

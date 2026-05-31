@@ -43,11 +43,11 @@ export function LoginForm() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-background via-background to-red-50/30 dark:to-red-950/10 p-4">
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-white via-white to-[#E31837]/5 dark:from-[#0f0f1a] dark:via-[#0f0f1a] dark:to-[#E31837]/5 p-4">
       <div className="w-full max-w-md space-y-6">
         {/* Logo & Title — matching fecredit.com.vn brand */}
         <div className="flex flex-col items-center gap-3 text-center">
-          <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-red-500 to-red-700 shadow-lg shadow-red-500/20">
+          <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-[#E31837] shadow-lg shadow-[#E31837]/20">
             <span className="text-lg font-black text-white leading-none">FC</span>
           </div>
           <div>
