@@ -14,6 +14,7 @@ import {
   Info,
   LogOut,
   User,
+  Phone,
 } from 'lucide-react';
 import {
   Sidebar,
@@ -28,8 +29,6 @@ import {
   SidebarMenuItem,
   SidebarSeparator,
 } from '@/components/ui/sidebar';
-import { Badge } from '@/components/ui/badge';
-import { APP_VERSION } from '@/lib/version';
 import { useAuthStore } from '@/lib/auth-store';
 
 const mainNavItems = [
@@ -96,14 +95,16 @@ export function AppSidebar() {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" tooltip="FE CREDIT Collection">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-red-600 to-red-700">
-                <svg className="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-red-500 to-red-700 shadow-md">
+                <span className="text-[10px] font-black text-white leading-none">FC</span>
               </div>
               <div className="flex flex-col gap-0.5 leading-none">
-                <span className="font-semibold">FE CREDIT</span>
-                <span className="text-xs text-muted-foreground">Thu hồi Nợ</span>
+                <span className="font-bold tracking-tight text-sidebar-foreground">
+                  FE CREDIT
+                </span>
+                <span className="text-[10px] text-sidebar-foreground/60">
+                  Hệ thống Thu hồi Nợ
+                </span>
               </div>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -174,14 +175,24 @@ export function AppSidebar() {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
+
+        {/* Hotline — matching fecredit.com.vn footer */}
+        <div className="mt-auto px-4 pb-2">
+          <div className="rounded-lg border border-sidebar-border bg-sidebar-accent/50 p-3">
+            <div className="flex items-center gap-2 text-[11px] text-sidebar-foreground/70">
+              <Phone className="h-3 w-3" aria-hidden="true" />
+              <span>Hotline: <strong className="text-sidebar-foreground">1900 6535</strong></span>
+            </div>
+          </div>
+        </div>
       </SidebarContent>
 
       <SidebarFooter className="border-t border-sidebar-border">
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton tooltip={user?.name || 'User'}>
-              <div className="flex h-6 w-6 items-center justify-center rounded-full bg-primary/10">
-                <User className="h-3 w-3 text-primary" aria-hidden="true" />
+              <div className="flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br from-red-500/20 to-red-600/10 border border-red-500/20">
+                <User className="h-3 w-3 text-red-500" aria-hidden="true" />
               </div>
               <div className="flex flex-col gap-0 leading-none">
                 <span className="text-xs font-medium">{user?.name}</span>

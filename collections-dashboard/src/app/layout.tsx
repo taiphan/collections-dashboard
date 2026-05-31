@@ -7,7 +7,7 @@ import './globals.css';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
-  subsets: ['latin'],
+  subsets: ['latin', 'latin-ext'],
 });
 
 const geistMono = Geist_Mono({
@@ -18,6 +18,8 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: 'FE CREDIT Collection — Hệ thống Quản lý Thu hồi Nợ',
   description: 'Nền tảng quản lý thu hồi nợ đa kênh cho FE CREDIT. Theo dõi hồ sơ, chiến lược thu hồi, phân tích hiệu suất.',
+  keywords: ['FE CREDIT', 'thu hồi nợ', 'collection', 'VPB SMBC FC', 'tài chính tiêu dùng'],
+  authors: [{ name: 'FE CREDIT Technology' }],
 };
 
 export default function RootLayout({
@@ -27,7 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="vi"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >

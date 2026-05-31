@@ -134,3 +134,33 @@
     transition: background-color 200ms ease, color 200ms ease;
   }
 }
+
+/* FE CREDIT brand utilities */
+@layer utilities {
+  .fecredit-gradient {
+    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  }
+  .fecredit-text-gradient {
+    background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+/* Custom scrollbar — subtle for corporate feel */
+@layer base {
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-border rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground/30;
+  }
+}
