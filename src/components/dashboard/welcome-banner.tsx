@@ -56,7 +56,7 @@ export function WelcomeBanner() {
           <div className="flex items-start justify-between gap-2">
             <div>
               <h3 className="text-sm font-semibold">
-                Chào {user.name}, chào mừng đến FE CREDIT Collection
+                Chào {user.name}, chào mừng đến Collection Portal
               </h3>
               <p className="mt-1 text-sm text-muted-foreground">
                 Bạn đang đăng nhập với vai trò <strong className="text-foreground">{roleLabel}</strong>. {tip}

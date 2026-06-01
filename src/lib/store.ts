@@ -119,7 +119,7 @@ export const useCollectionsStore = create<CollectionsState>()(
       },
     }),
     {
-      name: 'collections-dashboard-storage',
+      name: 'collection-portal-storage',
     }
   )
 );

@@ -1,6 +1,18 @@
-export const APP_VERSION = '2.0.0';
+export const APP_VERSION = '2.1.0';
 
 export const CHANGELOG: VersionEntry[] = [
+  {
+    version: '2.1.0',
+    date: '2026-06-01',
+    title: 'Collection Portal',
+    changes: [
+      'Rebrand to Collection Portal (FE CREDIT)',
+      'Role-based usage guide for admin/manager/collector/viewer',
+      'Welcome banner with personalized role tips',
+      'Route guard enforces permissions on direct URL access',
+      'Sidebar nav filtered by user permissions',
+    ],
+  },
   {
     version: '2.0.0',
     date: '2026-05-31',
@@ -10,7 +22,7 @@ export const CHANGELOG: VersionEntry[] = [
       'Case management with detailed debtor profiles',
       'Strategy designer for collection workflows',
       'Advanced analytics with ML-powered insights',
-      'Multi-theme support (5 color themes + dark/light mode)',
+      'FE CREDIT corporate branding with dark/light mode',
       'Digital self-collection portal concept',
       'Monitoring & continuous improvement dashboard',
     ],

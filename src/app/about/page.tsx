@@ -21,9 +21,9 @@ export default function AboutPage() {
                   <BarChart3 className="h-7 w-7 text-primary-foreground" aria-hidden="true" />
                 </div>
                 <div>
-                  <h1 className="text-xl font-bold">FE CREDIT Collection</h1>
+                  <h1 className="text-xl font-bold">Collection Portal</h1>
                   <p className="text-sm text-muted-foreground">
-                    Nền tảng quản lý thu hồi nợ đa kênh — VPB SMBC Finance Company
+                    FE CREDIT · VPB SMBC Finance Company
                   </p>
                   <div className="mt-2 flex items-center gap-2">
                     <Badge variant="secondary" className="font-mono">

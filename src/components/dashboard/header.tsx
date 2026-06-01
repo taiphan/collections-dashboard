@@ -15,9 +15,9 @@ export function DashboardHeader() {
           <span className="text-sm font-black text-white leading-none">FC</span>
         </div>
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">FE CREDIT Collection</h1>
+          <h1 className="text-2xl font-bold tracking-tight">Collection Portal</h1>
           <p className="text-sm text-muted-foreground">
-            Theo dõi và quản lý thu hồi nợ theo nhóm B1–B5
+            FE CREDIT · Theo dõi và quản lý thu hồi nợ theo nhóm B1–B5
           </p>
         </div>
       </div>

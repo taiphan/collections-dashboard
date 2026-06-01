@@ -308,7 +308,7 @@ export default function GuidePage() {
                   <BookOpen className="h-6 w-6 text-[#E31837]" aria-hidden="true" />
                 </div>
                 <div className="flex-1">
-                  <h2 className="text-xl font-bold">Chào mừng đến FE CREDIT Collection</h2>
+                  <h2 className="text-xl font-bold">Chào mừng đến Collection Portal</h2>
                   <p className="mt-1 text-sm text-muted-foreground">
                     Hướng dẫn này giúp bạn nắm rõ cách sử dụng hệ thống theo từng vai trò.
                     Chọn vai trò bên dưới để xem hướng dẫn chi tiết.

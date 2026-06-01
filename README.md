@@ -1,15 +1,15 @@
 <p align="center">
-  <img src="logo.svg" alt="Collections Dashboard" width="120" height="120" />
+  <img src="logo.svg" alt="Collection Portal" width="120" height="120" />
 </p>
 
-<h1 align="center">Collections Dashboard</h1>
+<h1 align="center">Collection Portal</h1>
 
 <p align="center">
-  <strong>Debt collections management platform with real-time analytics and agent performance tracking.</strong>
+  <strong>FE CREDIT debt collection portal — case management, strategy designer, and analytics.</strong>
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-1.0.0-green" alt="Version" />
+  <img src="https://img.shields.io/badge/version-2.1.0-green" alt="Version" />
   <img src="https://img.shields.io/badge/license-MIT-blue" alt="License" />
   <img src="https://img.shields.io/badge/Next.js-16-black" alt="Next.js" />
   <img src="https://img.shields.io/badge/TypeScript-5-blue" alt="TypeScript" />
@@ -20,17 +20,25 @@
 
 ## Overview
 
-Collections Dashboard is a comprehensive debt collections management system that provides real-time visibility into collection operations, agent performance, compliance monitoring, and strategy configuration.
+**Collection Portal** is FE CREDIT's omnichannel debt collection platform. It provides
+real-time visibility into collection operations, role-based access for collectors and
+managers, ML-driven scoring, compliance monitoring, and strategy configuration.
+
+Branded for **FE CREDIT** (VPB SMBC Finance Company) with the corporate red palette
+adapted from [fecredit.com.vn](https://fecredit.com.vn).
 
 ## Features
 
-- **Case Management** — Track and manage collection cases with status workflows
-- **Analytics Dashboard** — Interactive charts and KPIs for collection performance
-- **Agent Tracking** — Monitor agent productivity, call metrics, and outcomes
-- **Scoring Engine** — Configurable scoring models for account prioritization
-- **Compliance Module** — Regulatory compliance monitoring and audit trails
-- **Strategy Builder** — Configure and manage collection strategies
-- **Multi-Theme** — Light, dark, and system theme support
+- **Role-based access** — Admin, Manager, Collector, and Viewer roles with route guards
+- **Usage guide** — Tabbed in-app documentation for each role
+- **Case management** — Track and manage collection cases (B1–B5 buckets)
+- **Strategy designer** — Build multi-channel collection strategies
+- **Analytics dashboard** — Interactive charts and KPIs
+- **Agent tracking** — Monitor productivity, call metrics, and outcomes
+- **Scoring engine** — ML scoring models for account prioritization
+- **Compliance module** — Regulatory compliance and audit trails
+- **Vietnamese localization** — Full Vietnamese UI throughout
+- **Light/dark themes** — Light by default (matches fecredit.com.vn)
 
 ## Tech Stack
 
@@ -55,17 +63,16 @@ Collections Dashboard is a comprehensive debt collections management system that
 ### Installation
 
 ```bash
-cd collections-dashboard
 npm install
 ```
 
 ### Development
 
 ```bash
-npm run dev -- -p 3010
+npm run dev
 ```
 
-Open [http://localhost:3010](http://localhost:3010) in your browser.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ### Build
 
@@ -74,17 +81,33 @@ npm run build
 npm start
 ```
 
+## Demo Accounts
+
+| Username | Password | Role |
+|----------|----------|------|
+| `admin` | `admin123` | Administrator (full access) |
+| `manager` | `manager123` | Collection Manager |
+| `collector` | `collector123` | Field Collector |
+| `viewer` | `viewer123` | Compliance Viewer (read-only) |
+
 ## Project Structure
 
 ```
 src/
 ├── app/              # Next.js App Router pages
+│   ├── guide/        # Role-based usage guide
+│   ├── cases/        # Case management
+│   ├── strategies/   # Strategy designer
+│   └── ...
 ├── components/
 │   ├── ui/           # Reusable UI primitives
-│   └── ...           # Feature components
+│   ├── layout/       # Sidebar, header, route guard
+│   └── auth/         # Login form
 └── lib/
-    ├── store.ts      # Zustand state management
-    └── utils.ts      # Utility functions
+    ├── auth-store.ts    # Authentication state
+    ├── permissions.ts   # Role-based access control
+    ├── theme-store.ts   # Theme preferences
+    └── store.ts         # Collections data store
 ```
 
 ## Scripts
@@ -96,6 +119,14 @@ src/
 | `npm start` | Start production server |
 | `npm run lint` | Run ESLint |
 
+## Deployment
+
+Deployed to Vercel: [project-sunshineai.vercel.app](https://project-sunshineai.vercel.app)
+
+Mirrors:
+- GitHub: [github.com/taiphan/collections-dashboard](https://github.com/taiphan/collections-dashboard)
+- GitLab: [gitlab.com/taiphan/collections-dashboard](https://gitlab.com/taiphan/collections-dashboard)
+
 ## License
 
-This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
+MIT — see [LICENSE](LICENSE).

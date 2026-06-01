@@ -55,7 +55,7 @@ export const useThemeStore = create<ThemeState>()(
       setColor: (color) => set((state) => ({ config: { ...state.config, color } })),
     }),
     {
-      name: 'collections-theme-storage',
+      name: 'collection-portal-theme',
     }
   )
 );

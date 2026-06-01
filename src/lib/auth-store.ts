@@ -84,7 +84,7 @@ export const useAuthStore = create<AuthState>()(
       },
     }),
     {
-      name: 'collections-auth-storage',
+      name: 'collection-portal-auth',
     }
   )
 );

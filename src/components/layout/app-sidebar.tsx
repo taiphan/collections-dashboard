@@ -113,7 +113,7 @@ export function AppSidebar() {
               </div>
               <div className="flex flex-col gap-0.5 leading-none">
                 <span className="font-bold tracking-tight text-sidebar-foreground">FE CREDIT</span>
-                <span className="text-[10px] text-sidebar-foreground/60">Hệ thống Thu hồi Nợ</span>
+                <span className="text-[10px] text-sidebar-foreground/60">Collection Portal</span>
               </div>
             </SidebarMenuButton>
           </SidebarMenuItem>

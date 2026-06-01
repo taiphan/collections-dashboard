@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'FE CREDIT Collection — Hệ thống Quản lý Thu hồi Nợ',
-  description: 'Nền tảng quản lý thu hồi nợ đa kênh cho FE CREDIT. Theo dõi hồ sơ, chiến lược thu hồi, phân tích hiệu suất.',
+  title: 'Collection Portal — FE CREDIT',
+  description: 'Cổng thu hồi nợ đa kênh cho FE CREDIT. Theo dõi hồ sơ, chiến lược thu hồi, phân tích hiệu suất.',
 };
 
 export default function RootLayout({

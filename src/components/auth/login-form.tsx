@@ -91,7 +91,7 @@ export function LoginForm() {
 
           <div className="space-y-6">
             <h2 className="text-3xl font-bold leading-tight">
-              Hệ thống Quản lý<br />Thu hồi Nợ
+              Collection Portal<br />Cổng Thu hồi Nợ
             </h2>
             <p className="text-red-100 text-sm leading-relaxed max-w-md">
               Nền tảng thu hồi nợ đa kênh — Quản lý hồ sơ B1-B5, chiến lược thu hồi
@@ -119,12 +119,12 @@ export function LoginForm() {
               <div className="w-9 h-9 rounded-xl bg-[#E31837] flex items-center justify-center">
                 <span className="text-sm font-black text-white">FC</span>
               </div>
-              <span className="font-semibold">FE CREDIT Collection</span>
+              <span className="font-semibold">Collection Portal</span>
             </div>
             <div>
               <h1 className="text-2xl font-bold tracking-tight">Chào mừng trở lại</h1>
               <p className="text-sm text-muted-foreground mt-1.5">
-                Đăng nhập để truy cập hệ thống quản lý thu hồi nợ
+                Đăng nhập để truy cập Collection Portal
               </p>
             </div>
           </div>
