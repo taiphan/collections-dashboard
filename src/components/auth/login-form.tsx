@@ -2,184 +2,245 @@
 
 import { useState } from 'react';
 import { useAuthStore } from '@/lib/auth-store';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { BarChart3, Eye, EyeOff, LogIn, AlertCircle } from 'lucide-react';
+import { AlertCircle } from 'lucide-react';
+
+const DEMO_USERS = [
+  {
+    username: 'admin',
+    password: 'admin123',
+    name: 'Quản trị viên',
+    role: 'Administrator · IT Dept',
+    initials: 'QA',
+    color: 'bg-purple-600',
+  },
+  {
+    username: 'manager',
+    password: 'manager123',
+    name: 'Phạm Thị Mai',
+    role: 'Collection Manager · Recovery Dept',
+    initials: 'PM',
+    color: 'bg-blue-600',
+  },
+  {
+    username: 'collector',
+    password: 'collector123',
+    name: 'Nguyễn Minh Tuấn',
+    role: 'Senior Collector · Field Ops',
+    initials: 'NT',
+    color: 'bg-amber-600',
+  },
+  {
+    username: 'viewer',
+    password: 'viewer123',
+    name: 'Lê Văn Đức',
+    role: 'Compliance Viewer · Risk Dept',
+    initials: 'LD',
+    color: 'bg-emerald-600',
+  },
+];
 
 export function LoginForm() {
   const { login } = useAuthStore();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
 
     if (!username.trim()) {
-      setError('Username is required');
+      setError('Vui lòng nhập tên đăng nhập');
       return;
     }
     if (!password.trim()) {
-      setError('Password is required');
+      setError('Vui lòng nhập mật khẩu');
       return;
     }
 
-    setIsLoading(true);
+    setLoading(true);
 
-    // Simulate network delay
     setTimeout(() => {
       const result = login(username.trim(), password);
       if (!result.success) {
-        setError(result.error || 'Login failed');
+        setError(result.error || 'Đăng nhập thất bại');
       }
-      setIsLoading(false);
+      setLoading(false);
     }, 600);
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background p-4">
-      <div className="w-full max-w-md space-y-6">
-        {/* Logo & Title */}
-        <div className="flex flex-col items-center gap-3 text-center">
-          <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-[#E31837] shadow-lg shadow-[#E31837]/20">
-            <span className="text-lg font-black text-white leading-none">FC</span>
-          </div>
-          <div>
-            <h1 className="text-2xl font-bold tracking-tight">FE CREDIT</h1>
-            <p className="text-sm text-muted-foreground">Hệ thống Quản lý Thu hồi Nợ</p>
-          </div>
+    <div className="min-h-screen flex">
+      {/* Left panel — FE CREDIT branding */}
+      <div className="hidden lg:flex lg:w-[45%] bg-gradient-to-br from-[#E31837] via-[#c41530] to-[#8b0a1f] relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-20 left-10 w-72 h-72 rounded-full bg-white/20 blur-3xl" />
+          <div className="absolute bottom-20 right-10 w-96 h-96 rounded-full bg-white/10 blur-3xl" />
         </div>
+        <div className="relative z-10 flex flex-col justify-between p-12 text-white">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur flex items-center justify-center font-black text-lg">
+              FC
+            </div>
+            <div>
+              <span className="text-lg font-bold">FE CREDIT</span>
+              <p className="text-[10px] text-red-100 opacity-80">VPB SMBC Finance Company</p>
+            </div>
+          </div>
 
-        {/* Login Card */}
-        <Card>
-          <CardHeader className="text-center">
-            <CardTitle className="text-lg">Sign In</CardTitle>
-            <CardDescription>
-              Enter your credentials to access the platform
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              {/* Error Message */}
-              {error && (
-                <div className="flex items-center gap-2 rounded-md bg-destructive/10 p-3 text-sm text-destructive">
-                  <AlertCircle className="h-4 w-4 shrink-0" aria-hidden="true" />
-                  <span>{error}</span>
-                </div>
-              )}
-
-              {/* Username */}
-              <div className="space-y-2">
-                <Label htmlFor="username">Username</Label>
-                <Input
-                  id="username"
-                  type="text"
-                  placeholder="Enter your username"
-                  value={username}
-                  onChange={(e) => {
-                    setUsername(e.target.value);
-                    setError('');
-                  }}
-                  autoComplete="username"
-                  autoFocus
-                />
-              </div>
-
-              {/* Password */}
-              <div className="space-y-2">
-                <Label htmlFor="password">Password</Label>
-                <div className="relative">
-                  <Input
-                    id="password"
-                    type={showPassword ? 'text' : 'password'}
-                    placeholder="Enter your password"
-                    value={password}
-                    onChange={(e) => {
-                      setPassword(e.target.value);
-                      setError('');
-                    }}
-                    autoComplete="current-password"
-                    className="pr-10"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-muted-foreground transition-colors hover:text-foreground"
-                    aria-label={showPassword ? 'Hide password' : 'Show password'}
-                  >
-                    {showPassword ? (
-                      <EyeOff className="h-4 w-4" />
-                    ) : (
-                      <Eye className="h-4 w-4" />
-                    )}
-                  </button>
-                </div>
-              </div>
-
-              {/* Submit */}
-              <Button
-                type="submit"
-                className="w-full cursor-pointer gap-2"
-                disabled={isLoading}
-              >
-                {isLoading ? (
-                  <span className="flex items-center gap-2">
-                    <span className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
-                    Signing in...
-                  </span>
-                ) : (
-                  <>
-                    <LogIn className="h-4 w-4" aria-hidden="true" />
-                    Sign In
-                  </>
-                )}
-              </Button>
-            </form>
-          </CardContent>
-        </Card>
-
-        {/* Demo Credentials */}
-        <Card className="border-dashed">
-          <CardContent className="p-4">
-            <p className="mb-3 text-center text-xs font-medium text-muted-foreground">
-              Demo Accounts
+          <div className="space-y-6">
+            <h2 className="text-3xl font-bold leading-tight">
+              Hệ thống Quản lý<br />Thu hồi Nợ
+            </h2>
+            <p className="text-red-100 text-sm leading-relaxed max-w-md">
+              Nền tảng thu hồi nợ đa kênh — Quản lý hồ sơ B1-B5, chiến lược thu hồi
+              thông minh, phân tích AI/ML. Phục vụ hơn 13 triệu khách hàng FE CREDIT.
             </p>
-            <div className="grid grid-cols-2 gap-2">
-              {[
-                { user: 'admin', pass: 'admin123', role: 'Admin' },
-                { user: 'manager', pass: 'manager123', role: 'Manager' },
-                { user: 'collector', pass: 'collector123', role: 'Collector' },
-                { user: 'viewer', pass: 'viewer123', role: 'Viewer' },
-              ].map((cred) => (
+            <div className="grid grid-cols-2 gap-4 pt-4">
+              <Stat label="Tỷ lệ thu hồi" value="72%" />
+              <Stat label="Hồ sơ đang xử lý" value="850+" />
+              <Stat label="Thời gian liên hệ" value="<24h" />
+              <Stat label="Đội ngũ thu hồi" value="120+" />
+            </div>
+          </div>
+
+          <p className="text-red-200 text-xs">
+            © 2026 VPB SMBC Finance · Hiện thực hóa hàng triệu ước mơ
+          </p>
+        </div>
+      </div>
+
+      {/* Right panel — login form */}
+      <div className="flex-1 flex items-center justify-center p-8 bg-background">
+        <div className="w-full max-w-[380px]">
+          <div className="mb-8">
+            <div className="lg:hidden flex items-center gap-2 mb-6">
+              <div className="w-9 h-9 rounded-xl bg-[#E31837] flex items-center justify-center">
+                <span className="text-sm font-black text-white">FC</span>
+              </div>
+              <span className="font-semibold">FE CREDIT Collection</span>
+            </div>
+            <div>
+              <h1 className="text-2xl font-bold tracking-tight">Chào mừng trở lại</h1>
+              <p className="text-sm text-muted-foreground mt-1.5">
+                Đăng nhập để truy cập hệ thống quản lý thu hồi nợ
+              </p>
+            </div>
+          </div>
+
+          <form onSubmit={handleSubmit} className="space-y-5">
+            {error && (
+              <div className="flex items-center gap-2 p-3 rounded-lg bg-destructive/10 border border-destructive/20">
+                <AlertCircle className="w-4 h-4 text-destructive shrink-0" aria-hidden="true" />
+                <p className="text-sm text-destructive">{error}</p>
+              </div>
+            )}
+
+            <div className="space-y-1.5">
+              <label htmlFor="username" className="block text-[13px] font-medium">
+                Tên đăng nhập
+              </label>
+              <input
+                id="username"
+                type="text"
+                value={username}
+                onChange={(e) => {
+                  setUsername(e.target.value);
+                  setError('');
+                }}
+                className="w-full h-10 px-3.5 bg-background border border-input rounded-lg text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent transition-shadow"
+                placeholder="admin"
+                required
+                autoComplete="username"
+                autoFocus
+              />
+            </div>
+
+            <div className="space-y-1.5">
+              <label htmlFor="password" className="block text-[13px] font-medium">
+                Mật khẩu
+              </label>
+              <input
+                id="password"
+                type="password"
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  setError('');
+                }}
+                className="w-full h-10 px-3.5 bg-background border border-input rounded-lg text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent transition-shadow"
+                placeholder="Nhập mật khẩu"
+                required
+                autoComplete="current-password"
+              />
+            </div>
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full h-10 bg-primary text-primary-foreground rounded-lg text-sm font-medium hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-sm hover:shadow-md"
+            >
+              {loading ? (
+                <span className="flex items-center justify-center gap-2">
+                  <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                  </svg>
+                  Đang đăng nhập...
+                </span>
+              ) : (
+                'Đăng nhập'
+              )}
+            </button>
+          </form>
+
+          <div className="mt-8 pt-6 border-t">
+            <p className="text-[12px] font-medium text-muted-foreground mb-3">
+              Tài khoản Demo
+            </p>
+            <div className="space-y-2">
+              {DEMO_USERS.map((user) => (
                 <button
-                  key={cred.user}
+                  key={user.username}
                   type="button"
                   onClick={() => {
-                    setUsername(cred.user);
-                    setPassword(cred.pass);
+                    setUsername(user.username);
+                    setPassword(user.password);
                     setError('');
                   }}
-                  className="flex cursor-pointer items-center gap-2 rounded-md border p-2 text-left transition-colors hover:bg-muted"
+                  className="w-full flex items-center gap-3 p-2.5 rounded-lg border border-border hover:border-primary/40 hover:bg-primary/5 transition-all text-left group"
                 >
-                  <div className="flex-1">
-                    <p className="text-xs font-medium">{cred.user}</p>
-                    <p className="text-[10px] text-muted-foreground">{cred.pass}</p>
+                  <div className={`w-8 h-8 rounded-full flex items-center justify-center text-[11px] font-bold text-white ${user.color}`}>
+                    {user.initials}
                   </div>
-                  <Badge variant="secondary" className="text-[9px]">
-                    {cred.role}
-                  </Badge>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-[13px] font-medium group-hover:text-primary transition-colors">
+                      {user.name}
+                    </p>
+                    <p className="text-[11px] text-muted-foreground truncate">{user.role}</p>
+                  </div>
+                  <code className="text-[10px] text-muted-foreground bg-muted px-1.5 py-0.5 rounded hidden sm:block">
+                    {user.username}
+                  </code>
                 </button>
               ))}
             </div>
-          </CardContent>
-        </Card>
+            <p className="text-[11px] text-muted-foreground text-center mt-3">
+              Mật khẩu cho mỗi tài khoản: <code className="px-1 py-0.5 bg-muted rounded">{'<role>'}123</code>
+            </p>
+          </div>
+        </div>
       </div>
+    </div>
+  );
+}
+
+function Stat({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="p-3 rounded-lg bg-white/10 backdrop-blur">
+      <p className="text-xl font-bold">{value}</p>
+      <p className="text-[11px] text-red-100">{label}</p>
     </div>
   );
 }
