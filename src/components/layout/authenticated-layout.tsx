@@ -4,6 +4,7 @@ import { useAuthStore } from '@/lib/auth-store';
 import { LoginForm } from '@/components/auth/login-form';
 import { SidebarProvider, SidebarInset } from '@/components/ui/sidebar';
 import { AppSidebar } from './app-sidebar';
+import { RouteGuard } from './route-guard';
 
 interface AuthenticatedLayoutProps {
   children: React.ReactNode;
@@ -19,7 +20,9 @@ export function AuthenticatedLayout({ children }: AuthenticatedLayoutProps) {
   return (
     <SidebarProvider>
       <AppSidebar />
-      <SidebarInset>{children}</SidebarInset>
+      <SidebarInset>
+        <RouteGuard>{children}</RouteGuard>
+      </SidebarInset>
     </SidebarProvider>
   );
 }
