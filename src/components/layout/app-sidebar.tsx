@@ -14,6 +14,7 @@ import {
   Info,
   LogOut,
   User,
+  BookOpen,
 } from 'lucide-react';
 import {
   Sidebar,
@@ -74,6 +75,11 @@ const managementNavItems = [
 ];
 
 const systemNavItems = [
+  {
+    title: 'Hướng dẫn',
+    href: '/guide',
+    icon: BookOpen,
+  },
   {
     title: 'Cài đặt',
     href: '/settings',
