@@ -3,6 +3,7 @@
 import { useCollectionsStore } from '@/lib/store';
 import { AppHeader } from '@/components/layout/app-header';
 import { DashboardHeader } from '@/components/dashboard/header';
+import { WelcomeBanner } from '@/components/dashboard/welcome-banner';
 import { StatsCards } from '@/components/dashboard/stats-cards';
 import { BucketChart } from '@/components/dashboard/bucket-chart';
 import { BucketProgress } from '@/components/dashboard/bucket-progress';
@@ -18,9 +19,10 @@ export default function DashboardPage() {
 
   return (
     <>
-      <AppHeader title="Dashboard" description="Portfolio overview & KPIs" />
+      <AppHeader title="Tổng quan" description="Tổng quan danh mục & KPIs" />
       <main className="flex-1 overflow-auto p-4 sm:p-6 lg:p-8">
         <div className="mx-auto max-w-7xl space-y-8">
+          <WelcomeBanner />
           <DashboardHeader />
 
           {!hasData ? (
@@ -32,10 +34,10 @@ export default function DashboardPage() {
               <Tabs defaultValue="overview" className="space-y-4">
                 <TabsList>
                   <TabsTrigger value="overview" className="cursor-pointer">
-                    Overview
+                    Tổng quan
                   </TabsTrigger>
                   <TabsTrigger value="records" className="cursor-pointer">
-                    All Records
+                    Tất cả hồ sơ
                   </TabsTrigger>
                 </TabsList>
 
