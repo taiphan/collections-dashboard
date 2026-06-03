@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useSyncExternalStore } from 'react';
 import Link from 'next/link';
 import { BookOpen, X, ArrowRight, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -21,21 +21,32 @@ const ROLE_TIPS: Record<string, string> = {
 };
 
 const STORAGE_KEY = 'collections-welcome-dismissed';
+const DISMISS_EVENT = 'collections-welcome-dismiss';
+
+function subscribeToDismiss(onStoreChange: () => void) {
+  window.addEventListener('storage', onStoreChange);
+  window.addEventListener(DISMISS_EVENT, onStoreChange);
+  return () => {
+    window.removeEventListener('storage', onStoreChange);
+    window.removeEventListener(DISMISS_EVENT, onStoreChange);
+  };
+}
 
 export function WelcomeBanner() {
   const { user } = useAuthStore();
-  const [dismissed, setDismissed] = useState(true);
-
-  useEffect(() => {
-    if (typeof window === 'undefined' || !user) return;
-    const key = `${STORAGE_KEY}:${user.id}`;
-    setDismissed(localStorage.getItem(key) === '1');
-  }, [user]);
+  const dismissed = useSyncExternalStore(
+    subscribeToDismiss,
+    () => {
+      if (!user) return true;
+      return localStorage.getItem(`${STORAGE_KEY}:${user.id}`) === '1';
+    },
+    () => true
+  );
 
   const handleDismiss = () => {
     if (!user) return;
     localStorage.setItem(`${STORAGE_KEY}:${user.id}`, '1');
-    setDismissed(true);
+    window.dispatchEvent(new Event(DISMISS_EVENT));
   };
 
   if (dismissed || !user) return null;

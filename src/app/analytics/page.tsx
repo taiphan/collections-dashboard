@@ -74,6 +74,14 @@ const channelConfig = {
   recoveryRate: { label: 'Recovery Rate', color: '#10B981' },
 } satisfies ChartConfig;
 
+const PREDICTED_RECOVERY_BY_BUCKET: Record<BucketName, number> = {
+  B1: 320000,
+  B2: 580000,
+  B3: 890000,
+  B4: 1150000,
+  B5: 1260000,
+};
+
 export default function AnalyticsPage() {
   const { records, getStats } = useCollectionsStore();
   const stats = getStats();
@@ -369,7 +377,7 @@ export default function AnalyticsPage() {
                             </span>
                           </div>
                           <span className="font-mono text-xs">
-                            {formatCurrency(Math.random() * 1500000 + 200000)}
+                            {formatCurrency(PREDICTED_RECOVERY_BY_BUCKET[bucket])}
                           </span>
                         </div>
                       ))}
