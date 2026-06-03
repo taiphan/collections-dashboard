@@ -1,0 +1,74 @@
+# CI for the low-code-platform app.
+# Stages: install → lint/typecheck/test → build → docker image.
+
+stages:
+  - verify
+  - build
+  - package
+
+default:
+  image: node:20-alpine
+  cache:
+    key:
+      files:
+        - package-lock.json
+    paths:
+      - node_modules/
+
+.install: &install
+  - npm ci
+
+lint:
+  stage: verify
+  script:
+    - *install
+    - npm run lint
+
+typecheck:
+  stage: verify
+  script:
+    - *install
+    - npm run typecheck
+
+unit-tests:
+  stage: verify
+  script:
+    - *install
+    - npm run test
+
+# Integration tests need a Postgres service + Docker-in-Docker for Testcontainers.
+integration-tests:
+  stage: verify
+  image: node:20
+  services:
+    - docker:dind
+  variables:
+    TESTCONTAINERS_RYUK_DISABLED: "true"
+    DOCKER_HOST: tcp://docker:2375
+  script:
+    - npm ci
+    - npm run test:integration
+  allow_failure: true # promote to required once a runner with DinD is wired up
+
+build:
+  stage: build
+  script:
+    - *install
+    - npm run build
+  artifacts:
+    paths:
+      - .next/
+    expire_in: 1 hour
+
+docker-image:
+  stage: package
+  image: docker:27
+  services:
+    - docker:dind
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+  script:
+    - docker build -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA" -t "$CI_REGISTRY_IMAGE:latest" .
+    - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" --password-stdin "$CI_REGISTRY"
+    - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA"
+    - docker push "$CI_REGISTRY_IMAGE:latest"

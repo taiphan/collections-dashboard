@@ -1,0 +1,15 @@
+node_modules
+.next
+.git
+.gitignore
+npm-debug.log*
+storage-local
+coverage
+tests
+*.md
+.env*
+!.env.example
+worker/node_modules
+worker/dist
+.vscode
+.idea
